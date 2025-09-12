@@ -15,7 +15,9 @@ function PageHeader() {
           className="h-auto md:w-[200px]"
         />
       </Link>
-      <UnitSettings />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <UnitSettings />
+      </React.Suspense>
     </header>
   );
 }
