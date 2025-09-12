@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import UnitSettings from "../UnitSettings";
 
 function PageHeader() {
   return (
-    <header>
+    <header className="flex justify-between items-center flex-wrap gap-1.5">
       <Link href={`/`}>
         <Image
           src={`/assets/images/logo.svg`}
@@ -14,6 +15,7 @@ function PageHeader() {
           className="h-auto md:w-[200px]"
         />
       </Link>
+      <UnitSettings />
     </header>
   );
 }

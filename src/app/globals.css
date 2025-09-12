@@ -40,4 +40,14 @@
   --spacing-34: 8.75rem;
   /* Breakpoints */
   --breakpoint-tn: 22rem;
+  /* Box Shadow */
+  --shadow-lg: 0 8px 16px rgba(2, 1, 44, 32%);
+}
+
+.list-box {
+  display: block;
+  width: unset;
+  max-height: inherit;
+  min-height: unset;
+  border: none;
 }
