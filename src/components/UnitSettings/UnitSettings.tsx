@@ -56,7 +56,7 @@ function UnitSettings() {
   return (
     <form action="" onSubmit={(e) => e.preventDefault()}>
       <MenuTrigger>
-        <Button className="bg-neutral-800 rounded-6 md:rounded-8 px-2.5 py-2 md:px-3 md:py-4 flex items-center gap-1.5 md:gap-2.5 cursor-pointer">
+        <Button className="bg-neutral-800 rounded-6 md:rounded-8 px-2.5 py-2 md:px-3 md:py-4 flex items-center gap-1.5 md:gap-2.5 cursor-pointer hover:bg-neutral-700 outline-0 focus:shadow-(--my-shadow-menu-button)">
           <Image
             src={`/assets/images/icon-units.svg`}
             alt=""
@@ -85,7 +85,7 @@ function UnitSettings() {
           >
             <MenuItem
               id="switch"
-              className="px-2 py-2.5 cursor-pointer rounded-8"
+              className="px-2 py-2.5 cursor-pointer rounded-8 hover:bg-neutral-700 outline-0 data-[focused]:shadow-(--my-shadow-menu-item)"
             >
               {allUnitsSame
                 ? temperature === "metric"
@@ -101,7 +101,7 @@ function UnitSettings() {
               <MenuItem
                 id="metric-temp"
                 onAction={() => handleUnitChange("temp", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   temperature === "metric"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"
@@ -113,7 +113,7 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-temp"
                 onAction={() => handleUnitChange("temp", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   temperature === "imperial"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"
@@ -133,7 +133,7 @@ function UnitSettings() {
               <MenuItem
                 id="metric-wind"
                 onAction={() => handleUnitChange("wind", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   windSpeed === "metric"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"
@@ -145,7 +145,7 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-wind"
                 onAction={() => handleUnitChange("wind", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   windSpeed === "imperial"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"
@@ -165,7 +165,7 @@ function UnitSettings() {
               <MenuItem
                 id="metric-precip"
                 onAction={() => handleUnitChange("precip", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   precipitation === "metric"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"
@@ -177,7 +177,7 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-precip"
                 onAction={() => handleUnitChange("precip", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
                   precipitation === "imperial"
                     ? "bg-neutral-700"
                     : "hover:bg-neutral-700"

@@ -6,7 +6,10 @@ import UnitSettings from "../UnitSettings";
 function PageHeader() {
   return (
     <header className="flex justify-between items-center flex-wrap gap-1.5">
-      <Link href={`/`}>
+      <Link
+        href={`/`}
+        className="outline-0 rounded-6 focus-visible:shadow-(--my-shadow-menu-button)"
+      >
         <Image
           src={`/assets/images/logo.svg`}
           alt=""
@@ -14,6 +17,7 @@ function PageHeader() {
           height={28}
           className="h-auto md:w-[200px]"
         />
+        <p className="sr-only">WEATHER NOW SITE</p>
       </Link>
       <React.Suspense fallback={<div>Loading...</div>}>
         <UnitSettings />
