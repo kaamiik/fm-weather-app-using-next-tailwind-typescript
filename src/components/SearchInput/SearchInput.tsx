@@ -34,14 +34,25 @@ function SearchInput() {
 
       try {
         const response = await fetch(
-          `/api/locations?query=${encodeURIComponent(filterText)}`,
-          { signal, cache: "no-store" }
+          `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+            filterText
+          )}&count=5&language=en&format=json`,
+          {
+            signal,
+          }
         );
 
-        if (!response.ok) throw new Error("Failed to fetch locations");
+        if (!response.ok) {
+          console.error(
+            "Open-Meteo API error:",
+            response.status,
+            response.statusText
+          );
+          throw new Error("Failed to fetch locations");
+        }
 
-        const results = await response.json();
-        return { items: results };
+        const data = await response.json();
+        return { items: data.results || [] };
       } catch (error) {
         if (error instanceof Error && error.name === "AbortError") {
           return { items: [] };
@@ -52,25 +63,20 @@ function SearchInput() {
     },
   });
 
-  // Handle selection of an item
   const handleSelection = (key: React.Key | null) => {
     if (!key) return;
 
-    // Convert key to number since our IDs are numbers
     const locationId =
       typeof key === "string" ? parseInt(key, 10) : Number(key);
     const location = list.items.find((item) => item.id === locationId);
 
     if (!location) return;
 
-    console.log("Location selected:", location);
-
     const params = new URLSearchParams(searchParams.toString());
     params.set("place", location.name);
     params.set("lat", location.latitude.toString());
     params.set("long", location.longitude.toString());
 
-    // Use push instead of replace to ensure navigation works
     router.replace(`/?${params.toString()}`);
   };
 
@@ -103,6 +109,7 @@ function SearchInput() {
           className="p-2 bg-neutral-800 w-full rounded-12 max-h-60 overflow-auto outline-none grid gap-1"
           items={list.items}
           renderEmptyState={() => {
+            // Not enough characters
             if (list.filterText.length < 2) {
               return (
                 <div className="py-2.5 px-2 text-neutral-300">
@@ -111,6 +118,7 @@ function SearchInput() {
               );
             }
 
+            // loading to find places
             if (list.isLoading) {
               return (
                 <div className="py-2.5 px-2 text-neutral-300 flex items-center gap-2.5">
@@ -126,6 +134,7 @@ function SearchInput() {
               );
             }
 
+            // No locations found
             return (
               <div className="py-2.5 px-2 text-neutral-300">
                 {`No locations found for "${list.filterText}"`}
@@ -142,8 +151,7 @@ function SearchInput() {
               }`}
               className="py-2.5 px-2 cursor-pointer outline-none hover:bg-neutral-700 rounded-8 data-[hovered]:bg-neutral-700 data-[focused]:bg-neutral-700 data-[focused]:outline-1 data-[focused]:outline-neutral-600"
             >
-              {location.name}, {location.country}
-              {location.admin1}
+              {location.name}, {location.country}, {location.admin1}
             </ListBoxItem>
           )}
         </ListBox>
