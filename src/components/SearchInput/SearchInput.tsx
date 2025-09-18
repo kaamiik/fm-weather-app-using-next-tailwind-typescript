@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import {
   ComboBox,
@@ -12,7 +11,7 @@ import {
 } from "react-aria-components";
 import { useAsyncList } from "react-stately";
 
-type LocationData = {
+export type LocationData = {
   id: number;
   name: string;
   latitude: number;
@@ -21,11 +20,11 @@ type LocationData = {
   admin1?: string;
 };
 
-function SearchInput() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  // Async list loader
+function SearchInput({
+  onSelect,
+}: {
+  onSelect?: (loc: LocationData | null) => void;
+}) {
   const list = useAsyncList<LocationData>({
     async load({ signal, filterText }) {
       if (!filterText || filterText.length < 2) {
@@ -64,7 +63,9 @@ function SearchInput() {
   });
 
   const handleSelection = (key: React.Key | null) => {
-    if (!key) return;
+    if (!key) {
+      onSelect?.(null);
+    }
 
     const locationId =
       typeof key === "string" ? parseInt(key, 10) : Number(key);
@@ -72,12 +73,7 @@ function SearchInput() {
 
     if (!location) return;
 
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("place", location.name);
-    params.set("lat", location.latitude.toString());
-    params.set("long", location.longitude.toString());
-
-    router.replace(`/?${params.toString()}`);
+    onSelect?.(location);
   };
 
   return (
@@ -92,7 +88,7 @@ function SearchInput() {
     >
       <div className="relative">
         <Input
-          className="bg-neutral-800 py-4 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
+          className="bg-neutral-800 py-5 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
           placeholder="Search for a place"
         />
         <Image
@@ -100,7 +96,7 @@ function SearchInput() {
           alt=""
           width={20}
           height={20}
-          className="absolute top-[18px] left-6"
+          className="absolute top-[23px] left-6"
         />
       </div>
 
