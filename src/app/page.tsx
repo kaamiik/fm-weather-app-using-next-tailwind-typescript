@@ -1,5 +1,6 @@
 import SearchForm from "@/components/SearchForm";
 import { bricolageGrotesque } from "./layout";
+import React from "react";
 
 export default function Home() {
   return (
@@ -10,7 +11,9 @@ export default function Home() {
         How’s the sky looking today?
       </h1>
       <div>
-        <SearchForm />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <SearchForm />
+        </React.Suspense>
       </div>
     </main>
   );
