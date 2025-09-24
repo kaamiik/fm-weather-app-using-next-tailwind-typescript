@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import {
   ComboBox,
+  Label,
   Input,
   ListBox,
   ListBoxItem,
@@ -11,14 +12,13 @@ import {
 } from "react-aria-components";
 import { useAsyncList } from "react-stately";
 
-export type LocationData = {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  country: string;
-  admin1?: string;
-};
+import {
+  correctLocationData,
+  formatLocationDisplay,
+  formatLocationForSearch,
+  getFlagUrl,
+  type LocationData,
+} from "@/utils/utils";
 
 function SearchInput({
   onSelect,
@@ -35,7 +35,7 @@ function SearchInput({
         const response = await fetch(
           `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
             filterText
-          )}&count=5&language=en&format=json`,
+          )}&count=8&language=en&format=json`,
           {
             signal,
           }
@@ -51,7 +51,9 @@ function SearchInput({
         }
 
         const data = await response.json();
-        return { items: data.results || [] };
+        const locations = (data.results || []) as LocationData[];
+        const correctedLocations = locations.map(correctLocationData);
+        return { items: correctedLocations };
       } catch (error) {
         if (error instanceof Error && error.name === "AbortError") {
           return { items: [] };
@@ -73,7 +75,9 @@ function SearchInput({
 
     if (!location) return;
 
-    onSelect?.(location);
+    const correctedLocations = correctLocationData(location);
+
+    onSelect?.(correctedLocations);
   };
 
   return (
@@ -82,10 +86,10 @@ function SearchInput({
       onInputChange={list.setFilterText}
       onSelectionChange={handleSelection}
       className="relative"
-      shouldFocusWrap
       allowsEmptyCollection
       menuTrigger="focus"
     >
+      <Label className="sr-only">Search for a city or place</Label>
       <div className="relative">
         <Input
           className="bg-neutral-800 py-5 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
@@ -138,18 +142,31 @@ function SearchInput({
             );
           }}
         >
-          {(location) => (
-            <ListBoxItem
-              key={location.id}
-              id={location.id}
-              textValue={`${location.name}, ${location.country}${
-                location.admin1 ? `, ${location.admin1}` : ""
-              }`}
-              className="py-2.5 px-2 cursor-pointer outline-none hover:bg-neutral-700 rounded-8 data-[hovered]:bg-neutral-700 data-[focused]:bg-neutral-700 data-[focused]:outline-1 data-[focused]:outline-neutral-600"
-            >
-              {location.name}, {location.country}, {location.admin1}
-            </ListBoxItem>
-          )}
+          {(location) => {
+            const flagUrl = getFlagUrl(location.country_code, "medium");
+            return (
+              <ListBoxItem
+                key={location.id}
+                id={location.id}
+                textValue={formatLocationForSearch(location)}
+                className="py-2.5 px-2 cursor-pointer outline-none hover:bg-neutral-700 rounded-8 data-[hovered]:bg-neutral-700 data-[focused]:bg-neutral-700 data-[focused]:outline-1 data-[focused]:outline-neutral-600 flex items-center gap-2"
+              >
+                {flagUrl && (
+                  <Image
+                    src={flagUrl}
+                    alt={`${location.country} flag`}
+                    width={24}
+                    height={24}
+                    className="rounded-4"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
+                )}
+                <span>{formatLocationDisplay(location)}</span>
+              </ListBoxItem>
+            );
+          }}
         </ListBox>
       </Popover>
     </ComboBox>

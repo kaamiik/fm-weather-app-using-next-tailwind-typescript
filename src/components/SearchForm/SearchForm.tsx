@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import SearchInput from "../SearchInput";
 import SearchButton from "../SearchButton";
-import type { LocationData } from "../SearchInput";
+import { formatLocationForURL, type LocationData } from "@/utils/utils";
 
 function SearchForm() {
   const searchParams = useSearchParams();
@@ -17,7 +17,10 @@ function SearchForm() {
     if (!selected) return;
 
     const params = new URLSearchParams(searchParams.toString());
-    params.set("place", selected.name);
+
+    const formatedPlace = formatLocationForURL(selected);
+
+    params.set("place", formatedPlace);
     params.set("lat", selected.latitude.toString());
     params.set("long", selected.longitude.toString());
 

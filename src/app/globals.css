@@ -17,6 +17,7 @@
   --text-400: 1rem;
   --text-500: 1.125rem;
   --text-600: 1.25rem;
+  --text-600--line-height: 1.2;
   --text-700: 1.75rem;
   --text-800: 2rem;
   --text-800--line-height: 1;
@@ -50,6 +51,9 @@
     0 0 0 5px var(--color-neutral-0);
   --my-shadow-menu-item: 0 0 0 1px var(--color-neutral-900),
     0 0 0 2px var(--color-neutral-0);
+  /* Grid */
+  --my-grid-cols-info: repeat(auto-fit, minmax(9.125rem, 1fr));
+  --my-grid-cols-daily: repeat(auto-fit, minmax(84px, 1fr));
 }
 
 .list-box {
