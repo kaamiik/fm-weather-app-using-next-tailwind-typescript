@@ -13,6 +13,7 @@ type SearchParams = {
   temp?: string;
   wind?: string;
   precip?: string;
+  day?: string;
 };
 
 type WeatherData = {
@@ -119,32 +120,44 @@ export default async function Home({
       </div>
 
       {/* Content Container */}
-      <div className="grid gap-8">
-        {/* Weather Info Container */}
-        <div className="grid gap-5">
-          <WeatherInfo
-            place={place}
-            current={weatherData?.current}
+      {weatherData ? (
+        <div className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8">
+          {/* Weather Info Container */}
+          <div className="grid gap-5 xl:col-start-1 xl:row-start-1">
+            <WeatherInfo
+              place={place}
+              current={weatherData?.current}
+              tempUnit={(await searchParams).temp}
+            />
+
+            <WeatherDetails
+              current={weatherData?.current}
+              tempUnit={temp}
+              windUnit={wind}
+              precipUnit={precip}
+            />
+          </div>
+
+          {/* Daily Forecast Container */}
+          <DailyForecast
+            daily={weatherData?.daily}
             tempUnit={(await searchParams).temp}
+            className="xl:col-start-1 xl:row-start-2 self-end"
           />
 
-          <WeatherDetails
-            current={weatherData?.current}
-            tempUnit={temp}
-            windUnit={wind}
-            precipUnit={precip}
+          {/* Hourly Forecast Container */}
+          <HourlyForecast
+            hourly={weatherData?.hourly}
+            tempUnit={(await searchParams).temp}
+            selectedDay={(await searchParams).day}
+            className="xl:col-start-2 xl:row-span-full max-h-[43rem]"
           />
         </div>
-
-        {/* Daily Forecast Container */}
-        <DailyForecast
-          daily={weatherData?.daily}
-          tempUnit={(await searchParams).temp}
-        />
-
-        {/* Hourly ForeCast Container */}
-        <HourlyForecast />
-      </div>
+      ) : (
+        <span className="text-center text-800 md:text-900 mt-16">
+          Search for a Place
+        </span>
+      )}
     </main>
   );
 }

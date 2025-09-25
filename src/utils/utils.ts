@@ -140,3 +140,66 @@ export function getDayNames(daily?: {
     return date.toLocaleDateString("en-US", { weekday: "short" });
   });
 }
+
+type Houly = {
+  time: string[];
+  temperature_2m: number[];
+  weather_code: number[];
+};
+
+export function getCurrentDay(hourly?: Houly) {
+  if (!hourly?.time?.[0]) return;
+
+  const firstDate = new Date(hourly.time[0]);
+  return firstDate.toLocaleDateString("en-Us", { weekday: "long" });
+}
+
+export function getAvailableDays(hourly?: Houly) {
+  if (!hourly?.time) return [];
+
+  const uniqueDays = new Set<string>();
+
+  hourly.time.forEach((timeStr) => {
+    const date = new Date(timeStr);
+    const dayName = date.toLocaleDateString("en-Us", { weekday: "long" });
+    uniqueDays.add(dayName);
+  });
+
+  return Array.from(uniqueDays);
+}
+
+export function formatHour(timeStr: string) {
+  const date = new Date(timeStr);
+  return date
+    .toLocaleTimeString("en-US", {
+      hour: "numeric",
+      hour12: true,
+    })
+    .replace(" ", "");
+}
+
+export function getHoursForDay(
+  day: string | undefined,
+  hourly?: {
+    time: string[];
+    temperature_2m: number[];
+    weather_code: number[];
+  }
+) {
+  if (!hourly?.time || !hourly.temperature_2m || !hourly.weather_code) {
+    return [];
+  }
+
+  return hourly.time
+    .map((timeStr, index) => {
+      const date = new Date(timeStr);
+      const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+      return { timeStr, dayName, index };
+    })
+    .filter(({ dayName }) => dayName === day)
+    .map(({ timeStr, index }) => ({
+      time: formatHour(timeStr),
+      temperature: Math.round(hourly.temperature_2m[index]),
+      weatherCode: hourly.weather_code[index],
+    }));
+}

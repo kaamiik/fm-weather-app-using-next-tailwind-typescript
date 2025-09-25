@@ -1,5 +1,5 @@
 import * as React from "react";
-import DailyCard from "../DailyCard";
+import DailyWeatherCard from "../DailyWeatherCard";
 import { getDayNames } from "@/utils/utils";
 
 type DailyForecastProps = {
@@ -10,17 +10,22 @@ type DailyForecastProps = {
     temperature_2m_min: number[];
   };
   tempUnit?: string;
+  className?: string;
 };
 
-function DailyForecast({ daily, tempUnit = "metric" }: DailyForecastProps) {
+function DailyForecast({
+  daily,
+  tempUnit = "metric",
+  className = "",
+}: DailyForecastProps) {
   const dayNames = getDayNames(daily);
   return (
-    <div>
+    <div className={className}>
       <h3 className="text-600 font-semibold">Daily forecast</h3>
       <ul className="mt-5 grid gap-4 grid-cols-(--my-grid-cols-daily)">
         {daily
           ? daily.time.map((_, index) => (
-              <DailyCard
+              <DailyWeatherCard
                 key={daily.time[index]}
                 day={dayNames[index]}
                 weatherCode={daily.weather_code[index]}
@@ -30,7 +35,7 @@ function DailyForecast({ daily, tempUnit = "metric" }: DailyForecastProps) {
               />
             ))
           : dayNames.map((day) => (
-              <DailyCard
+              <DailyWeatherCard
                 key={day}
                 day={day}
                 weatherCode={0}

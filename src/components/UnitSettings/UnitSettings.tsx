@@ -81,11 +81,11 @@ function UnitSettings() {
                 handleSwitch();
               }
             }}
-            className="px-2 py-1.5 bg-neutral-800 rounded-10 md:rounded-12 inset-ring inset-ring-neutral-600 shadow-lg text-300 md:text-400 min-w-[10.5rem]"
+            className="px-2 py-1.5 bg-neutral-800 rounded-10 md:rounded-12 border border-neutral-600 shadow-lg text-300 md:text-400 min-w-[10.5rem] outline-0"
           >
             <MenuItem
               id="switch"
-              className="px-2 py-2.5 cursor-pointer rounded-8 hover:bg-neutral-700 outline-0 data-[focused]:shadow-(--my-shadow-menu-item)"
+              className="px-2 py-2.5 cursor-pointer rounded-8 hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
             >
               {allUnitsSame
                 ? temperature === "metric"
@@ -101,10 +101,10 @@ function UnitSettings() {
               <MenuItem
                 id="metric-temp"
                 onAction={() => handleUnitChange("temp", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   temperature === "metric"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 Celsius
@@ -113,10 +113,10 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-temp"
                 onAction={() => handleUnitChange("temp", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   temperature === "imperial"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 Fahrenheit
@@ -133,10 +133,10 @@ function UnitSettings() {
               <MenuItem
                 id="metric-wind"
                 onAction={() => handleUnitChange("wind", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   windSpeed === "metric"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 Km/h
@@ -145,10 +145,10 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-wind"
                 onAction={() => handleUnitChange("wind", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   windSpeed === "imperial"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 mph
@@ -165,10 +165,10 @@ function UnitSettings() {
               <MenuItem
                 id="metric-precip"
                 onAction={() => handleUnitChange("precip", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   precipitation === "metric"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 Millimeters
@@ -177,10 +177,10 @@ function UnitSettings() {
               <MenuItem
                 id="imperial-precip"
                 onAction={() => handleUnitChange("precip", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focused]:shadow-(--my-shadow-menu-item) ${
+                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
                   precipitation === "imperial"
                     ? "bg-neutral-700"
-                    : "hover:bg-neutral-700"
+                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
                 }`}
               >
                 Inches

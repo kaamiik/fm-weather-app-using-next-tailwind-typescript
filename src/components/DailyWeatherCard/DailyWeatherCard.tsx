@@ -2,7 +2,7 @@ import { getWeatherIcon } from "@/utils/utils";
 import Image from "next/image";
 import * as React from "react";
 
-function DailyCard({
+function DailyWeatherCard({
   day,
   weatherCode,
   minTemp,
@@ -42,4 +42,4 @@ function DailyCard({
   );
 }
 
-export default DailyCard;
+export default DailyWeatherCard;
