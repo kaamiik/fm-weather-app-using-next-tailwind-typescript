@@ -52,7 +52,7 @@ function HourlyForecast({
           onDayChange={handleDayChange}
         />
       </div>
-      <ul className="grid gap-4 overflow-y-auto">
+      <ul className="grid gap-4">
         {hoursToDisplay.length > 0
           ? hoursToDisplay.map((hourData, index) => (
               <HourlyWeatherCard
