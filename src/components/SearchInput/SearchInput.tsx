@@ -20,18 +20,28 @@ import {
   type LocationData,
 } from "@/utils/utils";
 
+type ErrorState = {
+  hasError: boolean;
+  message: string;
+};
+
 function SearchInput({
   onSelect,
 }: {
   onSelect?: (loc: LocationData | null) => void;
 }) {
+  const [hasError, setHasError] = React.useState(false);
+
   const list = useAsyncList<LocationData>({
     async load({ signal, filterText }) {
       if (!filterText || filterText.length < 2) {
+        setHasError(false);
         return { items: [] };
       }
 
       try {
+        setHasError(false);
+
         const response = await fetch(
           `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
             filterText
@@ -42,15 +52,14 @@ function SearchInput({
         );
 
         if (!response.ok) {
-          console.error(
-            "Open-Meteo API error:",
-            response.status,
-            response.statusText
-          );
-          throw new Error("Failed to fetch locations");
+          throw new Error("Server error");
         }
 
         const data = await response.json();
+
+        if (data.error) {
+          throw new Error("API error");
+        }
         const locations = (data.results || []) as LocationData[];
         const correctedLocations = locations.map(correctLocationData);
         return { items: correctedLocations };
@@ -58,7 +67,8 @@ function SearchInput({
         if (error instanceof Error && error.name === "AbortError") {
           return { items: [] };
         }
-        console.error(error);
+
+        setHasError(true);
         return { items: [] };
       }
     },
@@ -92,16 +102,22 @@ function SearchInput({
       <Label className="sr-only">Search for a city or place</Label>
       <div className="relative">
         <Input
-          className="bg-neutral-800 py-5 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
+          className="bg-neutral-800 py-5 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input) peer"
           placeholder="Search for a place"
         />
-        <Image
-          src={`/assets/images/icon-search.svg`}
-          alt=""
-          width={20}
-          height={20}
-          className="absolute top-[23px] left-6"
-        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="21"
+          height="21"
+          fill="none"
+          viewBox="0 0 21 21"
+          className="absolute top-[23px] left-6 transition-transform duration-300 ease-out motion-reduce:transition-none peer-aria-expanded:scale-110"
+        >
+          <path
+            fill="#D4D3D9"
+            d="M19.844 18.82c.195.196.195.508 0 .664l-.899.899c-.156.195-.468.195-.664 0l-4.726-4.727a.63.63 0 0 1-.117-.351v-.508c-1.446 1.21-3.282 1.953-5.313 1.953A8.119 8.119 0 0 1 0 8.625C0 4.172 3.633.5 8.125.5c4.453 0 8.125 3.672 8.125 8.125 0 2.031-.781 3.906-1.992 5.313h.508c.117 0 .234.078.351.156l4.727 4.726ZM8.125 14.875a6.243 6.243 0 0 0 6.25-6.25c0-3.438-2.813-6.25-6.25-6.25a6.243 6.243 0 0 0-6.25 6.25 6.219 6.219 0 0 0 6.25 6.25Z"
+          />
+        </svg>
       </div>
 
       <Popover style={{ width: "var(--trigger-width)" }}>
@@ -109,6 +125,14 @@ function SearchInput({
           className="p-2 bg-neutral-800 w-full rounded-12 max-h-60 overflow-auto outline-none grid gap-1"
           items={list.items}
           renderEmptyState={() => {
+            // Show error state
+            if (hasError) {
+              return (
+                <div className="py-3 px-2 text-red-400 text-center">
+                  Something went wrong. Please try again.
+                </div>
+              );
+            }
             // Not enough characters
             if (list.filterText.length < 2) {
               return (
@@ -122,13 +146,19 @@ function SearchInput({
             if (list.isLoading) {
               return (
                 <div className="py-2.5 px-2 text-neutral-300 flex items-center gap-2.5">
-                  <Image
-                    src={`/assets/images/icon-loading.svg`}
-                    alt=""
-                    width={16}
-                    height={19}
-                    className="animate-spin"
-                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    viewBox="0 0 16 16"
+                    className="animate-fast-spin"
+                  >
+                    <path
+                      fill="#fff"
+                      d="M9.25 1.5c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25C6.75.812 7.281.25 8 .25c.688 0 1.25.563 1.25 1.25ZM8 13.25c.688 0 1.25.563 1.25 1.25 0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25ZM15.75 8c0 .719-.563 1.25-1.25 1.25-.719 0-1.25-.531-1.25-1.25 0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm-13 0c0 .719-.563 1.25-1.25 1.25C.781 9.25.25 8.719.25 8c0-.688.531-1.25 1.25-1.25.688 0 1.25.563 1.25 1.25Zm.625-5.844c.719 0 1.25.563 1.25 1.25 0 .719-.531 1.25-1.25 1.25-.688 0-1.25-.531-1.25-1.25 0-.687.563-1.25 1.25-1.25Zm9.219 9.219c.687 0 1.25.531 1.25 1.25 0 .688-.563 1.25-1.25 1.25-.719 0-1.25-.563-1.25-1.25 0-.719.531-1.25 1.25-1.25Zm-9.219 0c.719 0 1.25.531 1.25 1.25 0 .688-.531 1.25-1.25 1.25-.688 0-1.25-.563-1.25-1.25 0-.719.563-1.25 1.25-1.25Z"
+                    />
+                  </svg>
                   <span>Search in progress</span>
                 </div>
               );

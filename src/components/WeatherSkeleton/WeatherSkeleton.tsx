@@ -3,9 +3,9 @@ import * as React from "react";
 function LoadingDots() {
   return (
     <div className="flex items-center justify-center gap-1">
-      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
-      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce"></div>
+      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce [animation-delay:-0.3s] motion-reduce:animate-none"></div>
+      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce [animation-delay:-0.15s] motion-reduce:animate-none"></div>
+      <div className="w-2 h-2 bg-neutral-300 rounded-full animate-bounce motion-reduce:animate-none"></div>
     </div>
   );
 }
@@ -18,7 +18,9 @@ function WeatherSkeleton() {
         <div className="py-10 px-6 md:py-20 bg-neutral-800 rounded-20 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 animate-pulse relative">
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-neutral-800 rounded-20">
             <LoadingDots />
-            <p className="text-neutral-300 mt-3 text-500">Loading...</p>
+            <p className="text-neutral-300 mt-3 text-500" aria-live="assertive">
+              Loading...
+            </p>
           </div>
 
           <div className="text-center flex flex-col gap-3 md:text-start md:gap-6 max-w-[24rem]">

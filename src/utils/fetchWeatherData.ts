@@ -6,7 +6,7 @@ export async function fetchWeatherData(
   tempUnit: string = "metric",
   windUnit: string = "metric",
   precipUnit: string = "metric"
-): Promise<WeatherData> {
+): Promise<WeatherData | string> {
   await new Promise((resolve) => setTimeout(resolve, 5000));
   const tempUnitParam = tempUnit === "imperial" ? "fahrenheit" : "celsius";
   const windUnitParam = windUnit === "imperial" ? "mph" : "kmh";
@@ -17,9 +17,7 @@ export async function fetchWeatherData(
   const response = await fetch(url, { next: { revalidate: 600 } });
 
   if (!response.ok) {
-    throw new Error(
-      `Weather API error: ${response.status} ${response.statusText}`
-    );
+    return `Weather API error: ${response.status} ${response.statusText}`;
   }
 
   return response.json();

@@ -55,15 +55,9 @@
   /* Grid */
   --my-grid-cols-info: repeat(auto-fit, minmax(9.125rem, 1fr));
   --my-grid-cols-daily: repeat(auto-fit, minmax(5.25rem, 1fr));
+  /* Animations */
+  --animate-fast-spin: spin 0.5s ease-in-out infinite;
 }
-
-/* .list-box {
-  display: block;
-  width: unset;
-  max-height: inherit;
-  min-height: unset;
-  border: none;
-} */
 
 .scroll-bar {
   scrollbar-width: thin;
