@@ -10,6 +10,17 @@ export type LocationData = {
   admin3?: string;
 };
 
+type NominatimResponse = {
+  display_name: string;
+  address: {
+    town?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    country_code?: string;
+  };
+};
+
 export function correctLocationData(location: LocationData) {
   let country = location.country;
 
@@ -73,6 +84,49 @@ export function formatLocationForURL(location: LocationData): string {
   parts.push(corrected.country || corrected.country_code || "Unknown Region");
 
   return parts.join(", ");
+}
+
+// Reverse Geocoding
+export async function reverseGeocode(
+  lat: number,
+  lng: number
+): Promise<string> {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Reverse geocoding failed");
+    }
+    const data: NominatimResponse = await response.json();
+    return formatPlaceFromNominatim(data);
+  } catch (error) {
+    console.error("Reverse geocoding error:", error);
+    return "Current Location";
+  }
+}
+
+// Format place name: Nominatim
+export function formatPlaceFromNominatim(data: NominatimResponse) {
+  const { address } = data;
+  const parts: string[] = [];
+
+  if (address.city) {
+    parts.push(address.city);
+  } else if (address.town) {
+    parts.push(address.town);
+  }
+
+  if (address.state) {
+    parts.push(address.state);
+  }
+
+  if (address.country) {
+    parts.push(address.country);
+  }
+
+  return parts.length > 0 ? parts.join(", ") : "Current Location";
 }
 
 // Flag from country_code

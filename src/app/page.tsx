@@ -2,6 +2,8 @@ import SearchForm from "@/components/SearchForm";
 import { bricolageGrotesque } from "./layout";
 import React from "react";
 import WeatherSection from "@/components/WeatherSection";
+import GeolocationHandler from "@/components/GeolocationHandler";
+import WeatherSkeleton from "@/components/WeatherSkeleton";
 
 type SearchParams = {
   place?: string;
@@ -11,6 +13,7 @@ type SearchParams = {
   wind?: string;
   precip?: string;
   day?: string;
+  loading?: string;
 };
 
 export default async function Home({
@@ -18,10 +21,14 @@ export default async function Home({
 }: {
   searchParams: Promise<SearchParams>;
 }) {
-  const { place, lat, long, temp, wind, precip, day } = await searchParams;
+  const { place, lat, long, temp, wind, precip, day, loading } =
+    await searchParams;
 
   return (
     <main className="grid gap-12 lg:gap-16">
+      <React.Suspense fallback={null}>
+        <GeolocationHandler />
+      </React.Suspense>
       <h1
         className={`${bricolageGrotesque.className} text-800 tn:text-900 font-bold text-center text-balance max-md:max-w-[30.125rem] mx-auto`}
       >
@@ -36,14 +43,10 @@ export default async function Home({
       </div>
 
       {/* Content Container */}
-      {lat && long ? (
-        <React.Suspense
-          fallback={
-            <div className="flex justify-center py-16">
-              <p className="text-600 font-bold">Loading weather data...</p>
-            </div>
-          }
-        >
+      {loading === "location" ? (
+        <WeatherSkeleton />
+      ) : lat && long ? (
+        <React.Suspense fallback={<WeatherSkeleton />}>
           <WeatherSection
             place={place}
             lat={lat}
