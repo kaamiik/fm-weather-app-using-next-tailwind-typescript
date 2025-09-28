@@ -76,7 +76,7 @@ export default async function WeatherSection({
         hourly={weatherData.hourly}
         tempUnit={temp}
         selectedDay={day}
-        className="xl:col-start-2 xl:row-span-full max-h-[43rem] overflow-auto"
+        className="xl:col-start-2 xl:row-span-full max-h-[43rem]"
       />
     </div>
   );

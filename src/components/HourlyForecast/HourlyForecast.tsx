@@ -44,7 +44,7 @@ function HourlyForecast({
     <div
       className={`py-5 px-4 bg-neutral-800 rounded-20 grid gap-4 ${className}`}
     >
-      <div className="flex items-center justify-between gap-1 flex-wrap">
+      <div className="flex items-center justify-between gap-2 flex-wrap">
         <h3 className="text-600 font-semibold">Hourly forecast</h3>
         <DaysDropdown
           selectedDay={activeDay}
@@ -52,7 +52,7 @@ function HourlyForecast({
           onDayChange={handleDayChange}
         />
       </div>
-      <ul className="grid gap-4">
+      <ul className="grid gap-4 relative overflow-y-auto scroll-bar">
         {hoursToDisplay.length > 0
           ? hoursToDisplay.map((hourData, index) => (
               <HourlyWeatherCard

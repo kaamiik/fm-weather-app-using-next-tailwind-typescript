@@ -57,10 +57,14 @@
   --my-grid-cols-daily: repeat(auto-fit, minmax(5.25rem, 1fr));
 }
 
-.list-box {
+/* .list-box {
   display: block;
   width: unset;
   max-height: inherit;
   min-height: unset;
   border: none;
+} */
+
+.scroll-bar {
+  scrollbar-width: thin;
 }
