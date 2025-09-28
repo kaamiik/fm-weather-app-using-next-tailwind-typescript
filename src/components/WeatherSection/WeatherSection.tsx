@@ -24,7 +24,7 @@ export default async function WeatherSection({
   precip,
   day,
 }: Props) {
-  const weatherData: WeatherData = await fetchWeatherData(
+  const weatherData: string | WeatherData = await fetchWeatherData(
     lat,
     long,
     temp || "metric",
@@ -33,6 +33,7 @@ export default async function WeatherSection({
   );
 
   if (
+    typeof weatherData === "string" ||
     !weatherData ||
     !weatherData.current ||
     !weatherData.daily ||
