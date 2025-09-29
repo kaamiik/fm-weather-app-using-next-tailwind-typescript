@@ -9,6 +9,7 @@ export const dmSans = DM_Sans({
   weight: ["300", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export const bricolageGrotesque = Bricolage_Grotesque({

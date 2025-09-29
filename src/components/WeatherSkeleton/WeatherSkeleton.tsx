@@ -11,6 +11,12 @@ function LoadingDots() {
 }
 
 function WeatherSkeleton() {
+  const weatherDetailsLabel = [
+    "Feels Like",
+    "Humidity",
+    "Wind",
+    "Precipitation",
+  ];
   return (
     <div className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8">
       {/* Weather Info Card Skeleton */}
@@ -34,14 +40,14 @@ function WeatherSkeleton() {
         </div>
 
         {/* Weather Details Cards Skeleton */}
-        <div className="grid gap-4 grid-cols-(--my-grid-cols-info)">
-          {Array.from({ length: 4 }).map((_, index) => (
+        <div className="grid gap-4 grid-cols-(--my-grid-cols-info) text-neutral-0">
+          {weatherDetailsLabel.map((label, index) => (
             <div
               key={index}
-              className="flex flex-col items-start gap-6 rounded-12 p-5 bg-neutral-800 border border-neutral-600 animate-pulse"
+              className="flex flex-col items-start gap-6 rounded-12 p-4 bg-neutral-800 border border-neutral-600 animate-pulse"
             >
-              <div className="h-5 bg-neutral-700 rounded-4 w-20"></div>
-              <div className="h-8 bg-neutral-700 rounded-6 w-16"></div>
+              <div className="h-5 rounded-4 w-20">{label}</div>
+              <div className="h-5 rounded-6 w-16">&#8212;</div>
             </div>
           ))}
         </div>

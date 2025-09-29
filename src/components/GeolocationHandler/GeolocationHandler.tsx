@@ -7,27 +7,22 @@ import { reverseGeocode } from "@/utils/utils";
 function GeolocationHandler() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [hasAskedForLocation, setHasAskedForLocation] = React.useState(false);
+  const startedRef = React.useRef(false);
 
   React.useEffect(() => {
     const hasCoordinates = searchParams.get("lat") && searchParams.get("long");
-    const hasAskedBefore = localStorage.getItem("location-permission-asked");
+    if (hasCoordinates) return;
 
-    if (hasCoordinates || hasAskedBefore || hasAskedForLocation) {
-      return;
-    }
+    if (startedRef.current) return;
 
     if (!navigator.geolocation) {
       console.log("Geolocation not supported");
       return;
     }
 
-    setHasAskedForLocation(true);
-    localStorage.setItem("location-permission-asked", "true");
-
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("loading", "location");
-    router.replace(`/?${params.toString()}`, { scroll: false });
+    const paramsLoading = new URLSearchParams(searchParams.toString());
+    paramsLoading.set("loading", "location");
+    router.replace(`/?${paramsLoading.toString()}`, { scroll: false });
 
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -71,7 +66,7 @@ function GeolocationHandler() {
         maximumAge: 300000,
       }
     );
-  }, [searchParams, router, hasAskedForLocation]);
+  }, [searchParams, router]);
 
   return null;
 }
