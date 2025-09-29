@@ -16,6 +16,10 @@ function WeatherSkeleton() {
     "Humidity",
     "Wind",
     "Precipitation",
+    "UV Index",
+    "Visibility",
+    "Air Quality",
+    "Sun Times",
   ];
   return (
     <div className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8">

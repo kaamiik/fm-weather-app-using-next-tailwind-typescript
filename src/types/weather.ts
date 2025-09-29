@@ -7,6 +7,8 @@ export type WeatherData = {
     precipitation: number;
     weather_code: number;
     wind_speed_10m: number;
+    visibility?: number;
+    european_aqi?: number | null;
   };
   daily: {
     time: string[];
@@ -21,6 +23,7 @@ export type WeatherData = {
     precipitation_sum: number[];
     precipitation_hours: number[];
     wind_speed_10m_max: number[];
+    uv_index_max: number[];
   };
   hourly: {
     time: string[];

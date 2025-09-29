@@ -257,3 +257,28 @@ export function getHoursForDay(
       weatherCode: hourly.weather_code[index],
     }));
 }
+
+export function formatTime(isoString: string): string {
+  const date = new Date(isoString);
+
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  return `${hours}:${minutes.toString().padStart(2, "0")}`;
+}
+
+export function getAQICategory(aqi: number): string {
+  if (aqi <= 20) return "Good";
+  if (aqi <= 40) return "Fair";
+  if (aqi <= 60) return "Mod";
+  if (aqi <= 80) return "Poor";
+  if (aqi <= 100) return "Bad";
+  return "Severe";
+}
+
+export function getUVCategory(uvIndex: number): string {
+  if (uvIndex <= 2) return "Low";
+  if (uvIndex <= 5) return "Mod";
+  if (uvIndex <= 7) return "High";
+  if (uvIndex <= 10) return "V High";
+  return "Extreme";
+}

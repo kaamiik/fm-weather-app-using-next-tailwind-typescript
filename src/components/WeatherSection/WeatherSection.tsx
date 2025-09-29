@@ -61,6 +61,7 @@ export default async function WeatherSection({
 
         <WeatherDetails
           current={weatherData.current}
+          daily={weatherData.daily}
           tempUnit={temp}
           windUnit={wind}
           precipUnit={precip}
@@ -77,7 +78,7 @@ export default async function WeatherSection({
         hourly={weatherData.hourly}
         tempUnit={temp}
         selectedDay={day}
-        className="xl:col-start-2 xl:row-span-full max-h-[43rem]"
+        className="xl:col-start-2 xl:row-span-full max-h-[43rem] xl:max-h-[49rem]"
       />
     </div>
   );

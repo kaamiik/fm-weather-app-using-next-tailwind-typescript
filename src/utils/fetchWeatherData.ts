@@ -12,13 +12,35 @@ export async function fetchWeatherData(
   const windUnitParam = windUnit === "imperial" ? "mph" : "kmh";
   const precipUnitParam = precipUnit === "imperial" ? "inch" : "mm";
 
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,temperature_80m&daily=temperature_2m_min,temperature_2m_max,weather_code,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_hours,wind_speed_10m_max&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation&timezone=auto&temperature_unit=${tempUnitParam}&wind_speed_unit=${windUnitParam}&precipitation_unit=${precipUnitParam}&forecast_days=7`;
+  const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,temperature_80m&daily=temperature_2m_min,temperature_2m_max,weather_code,sunrise,sunset,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_hours,wind_speed_10m_max,uv_index_max&current=temperature_2m,apparent_temperature,weather_code,relative_humidity_2m,wind_speed_10m,precipitation,visibility&timezone=auto&temperature_unit=${tempUnitParam}&wind_speed_unit=${windUnitParam}&precipitation_unit=${precipUnitParam}&forecast_days=7`;
 
-  const response = await fetch(url, { next: { revalidate: 600 } });
+  const airQualityUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lng}&current=european_aqi&timezone=auto`;
 
-  if (!response.ok) {
-    return `Weather API error: ${response.status} ${response.statusText}`;
+  const [weatherResponse, airQualityResponse] = await Promise.all([
+    fetch(weatherUrl, { next: { revalidate: 600 } }),
+    fetch(airQualityUrl, { next: { revalidate: 600 } }),
+  ]);
+
+  if (!weatherResponse.ok) {
+    return `Weather API error: ${weatherResponse.status} ${weatherResponse.statusText}`;
   }
 
-  return response.json();
+  if (!airQualityResponse.ok) {
+    return `Weather API error: ${airQualityResponse.status} ${airQualityResponse.statusText}`;
+  }
+
+  const weatherData = await weatherResponse.json();
+
+  let airQualityData = null;
+  if (airQualityResponse.ok) {
+    airQualityData = await airQualityResponse.json();
+  }
+
+  return {
+    ...weatherData,
+    current: {
+      ...weatherData.current,
+      european_aqi: airQualityData?.current?.european_aqi ?? null,
+    },
+  };
 }

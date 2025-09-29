@@ -1,5 +1,6 @@
 import * as React from "react";
 import DetailsCard from "../DetailsCard";
+import { formatTime, getAQICategory, getUVCategory } from "@/utils/utils";
 
 type WeatherDetailsProps = {
   current?: {
@@ -7,6 +8,13 @@ type WeatherDetailsProps = {
     relative_humidity_2m: number;
     wind_speed_10m: number;
     precipitation: number;
+    visibility?: number;
+    european_aqi?: number | null;
+  };
+  daily?: {
+    sunrise: string[];
+    sunset: string[];
+    uv_index_max: number[];
   };
   tempUnit?: string;
   windUnit?: string;
@@ -15,6 +23,7 @@ type WeatherDetailsProps = {
 
 function WeatherDetails({
   current,
+  daily,
   tempUnit,
   windUnit,
   precipUnit,
@@ -24,6 +33,29 @@ function WeatherDetails({
   const tempSymbol = tempUnit === "imperial" ? "°F" : "°C";
   const windSymbol = windUnit === "imperial" ? " mph" : " km/h";
   const precipSymbol = precipUnit === "imperial" ? " in" : " mm";
+
+  const uvIndex = daily?.uv_index_max?.[0];
+  const uvDisplay =
+    uvIndex !== null && uvIndex !== undefined
+      ? `${Math.round(uvIndex)} - ${getUVCategory(uvIndex)}`
+      : null;
+
+  const sunrise = daily?.sunrise?.[0] ? formatTime(daily.sunrise[0]) : null;
+  const sunset = daily?.sunset?.[0] ? formatTime(daily.sunset[0]) : null;
+
+  const visibility =
+    current.visibility !== undefined
+      ? windUnit === "imperial"
+        ? `${(current.visibility / 1609.34).toFixed(1)} mi`
+        : `${(current.visibility / 1000).toFixed(1)} km`
+      : null;
+
+  const aqiValue = current.european_aqi;
+  const aqiDisplay =
+    aqiValue !== null && aqiValue !== undefined
+      ? `${Math.round(aqiValue)} - ${getAQICategory(aqiValue)}`
+      : null;
+
   return (
     <dl className="grid gap-4 grid-cols-(--my-grid-cols-info)">
       <DetailsCard
@@ -47,6 +79,16 @@ function WeatherDetails({
       <DetailsCard
         label="Precipitation"
         value={current ? `${current.precipitation}${precipSymbol}` : "--"}
+      />
+      <DetailsCard
+        label="UV Index"
+        value={uvIndex !== undefined ? uvDisplay : "--"}
+      />
+      <DetailsCard label="Visibility" value={visibility || "--"} />
+      <DetailsCard label="Air Quality" value={aqiDisplay || "--"} />
+      <DetailsCard
+        label="Sun Times"
+        value={sunrise && sunset ? `${sunrise}/ ${sunset}` : "--"}
       />
     </dl>
   );
