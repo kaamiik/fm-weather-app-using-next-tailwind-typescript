@@ -30,10 +30,12 @@ function DailyWeatherCard({
       />
       <div className="flex items-center justify-between text-400 text-neutral-200">
         <p>
+          <span className="sr-only">MINIMUM TEMPERATURE:</span>
           {`${minTemp}${typeof minTemp === "number" ? "°" : ""}`}{" "}
           <span className="sr-only">{temp}</span>
         </p>
         <p>
+          <span className="sr-only">MAXIMUM TEMPERATURE:</span>
           {`${maxTemp}${typeof maxTemp === "number" ? "°" : ""}`}{" "}
           <span className="sr-only">{temp}</span>
         </p>

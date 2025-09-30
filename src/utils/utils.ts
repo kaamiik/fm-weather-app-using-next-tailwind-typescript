@@ -279,6 +279,6 @@ export function getUVCategory(uvIndex: number): string {
   if (uvIndex <= 2) return "Low";
   if (uvIndex <= 5) return "Mod";
   if (uvIndex <= 7) return "High";
-  if (uvIndex <= 10) return "V High";
+  if (uvIndex <= 10) return "Intense";
   return "Extreme";
 }
