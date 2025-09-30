@@ -22,7 +22,11 @@ function WeatherSkeleton() {
     "Sun Times",
   ];
   return (
-    <div className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8">
+    <div
+      role="status"
+      aria-live="polite"
+      className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8"
+    >
       {/* Weather Info Card Skeleton */}
       <div className="grid gap-5 xl:col-start-1 xl:row-start-1">
         <div className="py-10 px-6 md:py-20 bg-neutral-800 rounded-20 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 animate-pulse relative">

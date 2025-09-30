@@ -91,7 +91,7 @@ function UnitSettings() {
           </svg>
         </Button>
 
-        <Popover placement="bottom end">
+        <Popover placement="bottom end" className="overflow-y-auto">
           <Menu
             selectionMode="multiple"
             onAction={(key) => {
@@ -208,7 +208,7 @@ function UnitSettings() {
           </Menu>
         </Popover>
       </MenuTrigger>
-      <button className="sr-only" tabIndex={-1}>
+      <button aria-hidden="true" className="sr-only" tabIndex={-1}>
         Submit
       </button>
     </form>

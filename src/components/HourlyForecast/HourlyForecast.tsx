@@ -41,18 +41,24 @@ function HourlyForecast({
   if (!hourly?.time) return null;
 
   return (
-    <div
+    <section
+      aria-labelledby="hourly-forecast-heading"
       className={`py-5 px-4 bg-neutral-800 rounded-20 grid gap-4 ${className}`}
     >
       <div className="flex items-center justify-between gap-2 flex-wrap">
-        <h3 className="text-600 font-semibold">Hourly forecast</h3>
+        <h3 id="hourly-forecast-heading" className="text-600 font-semibold">
+          Hourly forecast
+        </h3>
         <DaysDropdown
           selectedDay={activeDay}
           availableDays={availableDays}
           onDayChange={handleDayChange}
         />
       </div>
-      <ul className="grid gap-4 relative overflow-y-auto scroll-bar">
+      <ul
+        aria-live="polite"
+        className="grid gap-4 relative overflow-y-auto scroll-bar"
+      >
         {hoursToDisplay.length > 0
           ? hoursToDisplay.map((hourData, index) => (
               <HourlyWeatherCard
@@ -74,7 +80,7 @@ function HourlyForecast({
               />
             ))}
       </ul>
-    </div>
+    </section>
   );
 }
 

@@ -20,8 +20,10 @@ function DailyForecast({
 }: DailyForecastProps) {
   const dayNames = getDayNames(daily);
   return (
-    <div className={className}>
-      <h3 className="text-600 font-semibold">Daily forecast</h3>
+    <section aria-labelledby="daily-forecast-heading" className={className}>
+      <h3 id="daily-forecast-heading" className="text-600 font-semibold">
+        Daily forecast
+      </h3>
       <ul className="mt-5 grid gap-4 grid-cols-(--my-grid-cols-daily)">
         {daily
           ? daily.time.map((_, index) => (
@@ -45,7 +47,7 @@ function DailyForecast({
               />
             ))}
       </ul>
-    </div>
+    </section>
   );
 }
 

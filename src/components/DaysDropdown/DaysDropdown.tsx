@@ -57,6 +57,7 @@ function DaysDropdown({
               <ListBoxItem
                 key={day}
                 id={day}
+                textValue={day}
                 className="py-2.5 px-2 rounded-8 cursor-pointer hover:bg-neutral-600 data-[focus-visible]:bg-neutral-600 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
               >
                 {day}
@@ -65,7 +66,7 @@ function DaysDropdown({
           </ListBox>
         </Popover>
       </Select>
-      <button className="sr-only" tabIndex={-1}>
+      <button aria-hidden="true" className="sr-only" tabIndex={-1}>
         Submit
       </button>
     </form>
