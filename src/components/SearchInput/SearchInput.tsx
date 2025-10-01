@@ -22,8 +22,10 @@ import {
 
 function SearchInput({
   onSelect,
+  isDisabled = false,
 }: {
   onSelect?: (loc: LocationData | null) => void;
+  isDisabled?: boolean;
 }) {
   const [hasError, setHasError] = React.useState(false);
 
@@ -93,11 +95,12 @@ function SearchInput({
       className="relative"
       allowsEmptyCollection
       menuTrigger="focus"
+      isDisabled={isDisabled}
     >
       <Label className="sr-only">Search for a city or place</Label>
       <div className="relative">
         <Input
-          className="rounded-12 peer w-full min-w-0 bg-neutral-800 py-5 ps-[60px] outline-0 placeholder:text-neutral-200 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
+          className="rounded-12 peer w-full min-w-0 bg-neutral-800 py-5 ps-[60px] outline-0 placeholder:text-neutral-200 hover:bg-neutral-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-neutral-800 data-[focused]:shadow-(--my-shadow-input)"
           placeholder="Search for a place"
         />
         <svg
@@ -124,7 +127,7 @@ function SearchInput({
             if (hasError) {
               return (
                 <div className="px-2 py-3 text-center text-red-400">
-                  Something went wrong. Please try again.
+                  Something went wrong. Please try again later.
                 </div>
               );
             }

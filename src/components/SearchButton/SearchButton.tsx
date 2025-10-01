@@ -1,10 +1,13 @@
 import * as React from 'react';
+import { useSearchParams } from 'next/navigation';
 
 function SearchButton({ loading }: { loading: boolean }) {
+  const searchParams = useSearchParams();
+  const loadingOnInitial = searchParams.get('loading') === 'location';
   return (
     <button
       disabled={loading}
-      className="rounded-12 grid w-full cursor-pointer bg-blue-500 py-4 hover:bg-blue-700 focus:shadow-(--my-shadow-button) focus:outline-0 md:px-6"
+      className={`rounded-12 grid w-full bg-blue-500 py-4 focus:outline-0 md:px-6 ${loadingOnInitial ? 'hover-bg-blue-500 cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-blue-700 focus:shadow-(--my-shadow-button)'}`}
     >
       <span className={`col-1 row-1 mt-1 ${loading ? 'invisible' : ''}`}>
         Search

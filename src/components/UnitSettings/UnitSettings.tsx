@@ -20,6 +20,8 @@ function UnitSettings() {
   const windSpeed = searchParams.get('wind') || 'metric';
   const precipitation = searchParams.get('precip') || 'metric';
 
+  const isLoading = searchParams.get('loading') === 'location';
+
   const selectedKeys = new Set([
     `${temperature}-temp`,
     `${windSpeed}-wind`,
@@ -67,7 +69,10 @@ function UnitSettings() {
   return (
     <form action="" onSubmit={(e) => e.preventDefault()}>
       <MenuTrigger>
-        <Button className="rounded-6 md:rounded-8 group flex cursor-pointer items-center gap-1.5 bg-neutral-800 px-2.5 py-2 outline-0 hover:bg-neutral-700 focus:shadow-(--my-shadow-menu-button) md:gap-2.5 md:px-3 md:py-4">
+        <Button
+          isDisabled={isLoading}
+          className="rounded-6 md:rounded-8 group flex cursor-pointer items-center gap-1.5 bg-neutral-800 px-2.5 py-2 outline-0 hover:bg-neutral-700 focus:shadow-(--my-shadow-menu-button) disabled:cursor-not-allowed disabled:bg-neutral-800 disabled:opacity-50 md:gap-2.5 md:px-3 md:py-4"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

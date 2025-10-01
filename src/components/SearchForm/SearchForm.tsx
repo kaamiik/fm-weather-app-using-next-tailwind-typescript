@@ -12,6 +12,8 @@ function SearchForm() {
   const [selected, setSelected] = React.useState<LocationData | null>(null);
   const [isPending, startTransition] = React.useTransition();
 
+  const isLoading = searchParams.get('loading') === 'location' || isPending;
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!selected) return;
@@ -34,7 +36,7 @@ function SearchForm() {
       className="text-600 mx-auto grid max-w-[41rem] gap-3 md:grid-cols-[1fr_auto] md:gap-4"
     >
       <React.Suspense fallback={<div>Loading...</div>}>
-        <SearchInput onSelect={setSelected} />
+        <SearchInput onSelect={setSelected} isDisabled={isLoading} />
       </React.Suspense>
       <SearchButton loading={isPending} />
     </form>
