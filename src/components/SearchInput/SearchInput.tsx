@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Image from "next/image";
+import * as React from 'react';
+import Image from 'next/image';
 import {
   ComboBox,
   Label,
@@ -9,8 +9,8 @@ import {
   ListBox,
   ListBoxItem,
   Popover,
-} from "react-aria-components";
-import { useAsyncList } from "react-stately";
+} from 'react-aria-components';
+import { useAsyncList } from 'react-stately';
 
 import {
   correctLocationData,
@@ -18,12 +18,7 @@ import {
   formatLocationForSearch,
   getFlagUrl,
   type LocationData,
-} from "@/utils/utils";
-
-type ErrorState = {
-  hasError: boolean;
-  message: string;
-};
+} from '@/utils/utils';
 
 function SearchInput({
   onSelect,
@@ -52,19 +47,19 @@ function SearchInput({
         );
 
         if (!response.ok) {
-          throw new Error("Server error");
+          throw new Error('Server error');
         }
 
         const data = await response.json();
 
         if (data.error) {
-          throw new Error("API error");
+          throw new Error('API error');
         }
         const locations = (data.results || []) as LocationData[];
         const correctedLocations = locations.map(correctLocationData);
         return { items: correctedLocations };
       } catch (error) {
-        if (error instanceof Error && error.name === "AbortError") {
+        if (error instanceof Error && error.name === 'AbortError') {
           return { items: [] };
         }
 
@@ -80,7 +75,7 @@ function SearchInput({
     }
 
     const locationId =
-      typeof key === "string" ? parseInt(key, 10) : Number(key);
+      typeof key === 'string' ? parseInt(key, 10) : Number(key);
     const location = list.items.find((item) => item.id === locationId);
 
     if (!location) return;
@@ -102,7 +97,7 @@ function SearchInput({
       <Label className="sr-only">Search for a city or place</Label>
       <div className="relative">
         <Input
-          className="bg-neutral-800 py-5 ps-[60px] w-full placeholder:text-neutral-200 rounded-12 outline-0 min-w-0 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input) peer"
+          className="rounded-12 peer w-full min-w-0 bg-neutral-800 py-5 ps-[60px] outline-0 placeholder:text-neutral-200 hover:bg-neutral-700 data-[focused]:shadow-(--my-shadow-input)"
           placeholder="Search for a place"
         />
         <svg
@@ -111,7 +106,7 @@ function SearchInput({
           height="21"
           fill="none"
           viewBox="0 0 21 21"
-          className="absolute top-[23px] left-6 transition-transform duration-300 ease-out motion-reduce:transition-none peer-aria-expanded:scale-110"
+          className="absolute top-[23px] left-6 transition-transform duration-300 ease-out peer-aria-expanded:scale-110 motion-reduce:transition-none"
         >
           <path
             fill="#D4D3D9"
@@ -120,15 +115,15 @@ function SearchInput({
         </svg>
       </div>
 
-      <Popover style={{ width: "var(--trigger-width)" }}>
+      <Popover style={{ width: 'var(--trigger-width)' }}>
         <ListBox
-          className="p-2 bg-neutral-800 w-full rounded-12 max-h-60 overflow-auto outline-none grid gap-1"
+          className="rounded-12 grid max-h-60 w-full gap-1 overflow-auto bg-neutral-800 p-2 outline-none"
           items={list.items}
           renderEmptyState={() => {
             // Show error state
             if (hasError) {
               return (
-                <div className="py-3 px-2 text-red-400 text-center">
+                <div className="px-2 py-3 text-center text-red-400">
                   Something went wrong. Please try again.
                 </div>
               );
@@ -136,7 +131,7 @@ function SearchInput({
             // Not enough characters
             if (list.filterText.length < 2) {
               return (
-                <div className="py-2.5 px-2 text-neutral-300">
+                <div className="px-2 py-2.5 text-neutral-300">
                   Type at least 2 characters
                 </div>
               );
@@ -145,7 +140,7 @@ function SearchInput({
             // loading to find places
             if (list.isLoading) {
               return (
-                <div className="py-2.5 px-2 text-neutral-300 flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5 px-2 py-2.5 text-neutral-300">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -166,20 +161,20 @@ function SearchInput({
 
             // No locations found
             return (
-              <div className="py-2.5 px-2 text-neutral-300">
+              <div className="px-2 py-2.5 text-neutral-300">
                 {`No locations found for "${list.filterText}"`}
               </div>
             );
           }}
         >
           {(location) => {
-            const flagUrl = getFlagUrl(location.country_code, "medium");
+            const flagUrl = getFlagUrl(location.country_code, 'medium');
             return (
               <ListBoxItem
                 key={location.id}
                 id={location.id}
                 textValue={formatLocationForSearch(location)}
-                className="py-2.5 px-2 cursor-pointer outline-none hover:bg-neutral-700 rounded-8 data-[hovered]:bg-neutral-700 data-[focused]:bg-neutral-700 data-[focused]:outline-1 data-[focused]:outline-neutral-600 flex items-center gap-2"
+                className="rounded-8 flex cursor-pointer items-center gap-2 px-2 py-2.5 outline-none hover:bg-neutral-700 data-[focused]:bg-neutral-700 data-[focused]:outline-1 data-[focused]:outline-neutral-600 data-[hovered]:bg-neutral-700"
               >
                 {flagUrl && (
                   <Image
@@ -189,7 +184,7 @@ function SearchInput({
                     height={24}
                     className="rounded-4"
                     onError={(e) => {
-                      e.currentTarget.style.display = "none";
+                      e.currentTarget.style.display = 'none';
                     }}
                   />
                 )}

@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import * as React from "react";
-import UnitSettings from "../UnitSettings";
+import Image from 'next/image';
+import Link from 'next/link';
+import * as React from 'react';
+import UnitSettings from '../UnitSettings';
 
 function PageHeader() {
   return (
-    <header className="flex justify-between items-center flex-wrap gap-1.5">
+    <header className="flex flex-wrap items-center justify-between gap-1.5">
       <Link
         href={`/`}
-        className="outline-0 rounded-6 focus-visible:shadow-(--my-shadow-menu-button)"
+        className="rounded-6 outline-0 focus-visible:shadow-(--my-shadow-menu-button)"
       >
         <Image
           src={`/assets/images/logo.svg`}

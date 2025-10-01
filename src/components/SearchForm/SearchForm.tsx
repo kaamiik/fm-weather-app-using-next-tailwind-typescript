@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import SearchInput from "../SearchInput";
-import SearchButton from "../SearchButton";
-import { formatLocationForURL, type LocationData } from "@/utils/utils";
+import * as React from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import SearchInput from '../SearchInput';
+import SearchButton from '../SearchButton';
+import { formatLocationForURL, type LocationData } from '@/utils/utils';
 
 function SearchForm() {
   const searchParams = useSearchParams();
@@ -20,9 +20,9 @@ function SearchForm() {
 
     const formatedPlace = formatLocationForURL(selected);
 
-    params.set("place", formatedPlace);
-    params.set("lat", selected.latitude.toString());
-    params.set("long", selected.longitude.toString());
+    params.set('place', formatedPlace);
+    params.set('lat', selected.latitude.toString());
+    params.set('long', selected.longitude.toString());
 
     startTransition(() => {
       router.replace(`/?${params.toString()}`);
@@ -31,7 +31,7 @@ function SearchForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid gap-3 md:gap-4 md:grid-cols-[1fr_auto] max-w-[41rem] mx-auto text-600"
+      className="text-600 mx-auto grid max-w-[41rem] gap-3 md:grid-cols-[1fr_auto] md:gap-4"
     >
       <React.Suspense fallback={<div>Loading...</div>}>
         <SearchInput onSelect={setSelected} />

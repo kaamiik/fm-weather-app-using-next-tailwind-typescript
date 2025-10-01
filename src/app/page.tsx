@@ -1,11 +1,11 @@
-import SearchForm from "@/components/SearchForm";
-import { bricolageGrotesque } from "./layout";
-import React from "react";
-import WeatherSection from "@/components/WeatherSection";
-import GeolocationHandler from "@/components/GeolocationHandler";
-import WeatherSkeleton from "@/components/WeatherSkeleton";
-import type { Metadata } from "next";
-import { cleanPlaceName } from "@/utils/utils";
+import SearchForm from '@/components/SearchForm';
+import { bricolageGrotesque } from './layout';
+import React from 'react';
+import WeatherSection from '@/components/WeatherSection';
+import GeolocationHandler from '@/components/GeolocationHandler';
+import WeatherSkeleton from '@/components/WeatherSkeleton';
+import type { Metadata } from 'next';
+import { cleanPlaceName } from '@/utils/utils';
 
 type SearchParams = {
   place?: string;
@@ -28,10 +28,10 @@ export async function generateMetadata({
   const cleanPlace = place ? cleanPlaceName(place) : null;
 
   return {
-    title: cleanPlace ? `${cleanPlace}|Weather Now` : "Weather Now",
+    title: cleanPlace ? `${cleanPlace}|Weather Now` : 'Weather Now',
     description: cleanPlace
       ? `Current weather conditions, hourly and daily forecast for ${cleanPlace}`
-      : "Search for any location to get current weather conditions and forecasts",
+      : 'Search for any location to get current weather conditions and forecasts',
   };
 }
 
@@ -49,7 +49,7 @@ export default async function Home({
         <GeolocationHandler />
       </React.Suspense>
       <h1
-        className={`${bricolageGrotesque.className} text-800 tn:text-900 font-bold text-center text-balance max-md:max-w-[30.125rem] mx-auto`}
+        className={`${bricolageGrotesque.className} text-800 tn:text-900 mx-auto text-center font-bold text-balance max-md:max-w-[30.125rem]`}
       >
         {`How's the sky looking today?`}
       </h1>
@@ -62,7 +62,7 @@ export default async function Home({
       </div>
 
       {/* Content Container */}
-      {loading === "location" ? (
+      {loading === 'location' ? (
         <WeatherSkeleton />
       ) : lat && long ? (
         <React.Suspense fallback={<WeatherSkeleton />}>
@@ -78,7 +78,7 @@ export default async function Home({
         </React.Suspense>
       ) : (
         <span
-          className={`${bricolageGrotesque.className} text-center text-800 md:text-900 italic mt-16`}
+          className={`${bricolageGrotesque.className} text-800 md:text-900 mt-16 text-center italic`}
         >
           Search for a Place
         </span>

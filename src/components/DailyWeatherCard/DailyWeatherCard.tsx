@@ -1,6 +1,6 @@
-import { getWeatherIcon } from "@/utils/utils";
-import Image from "next/image";
-import * as React from "react";
+import { getWeatherIcon } from '@/utils/utils';
+import Image from 'next/image';
+import * as React from 'react';
 
 function DailyWeatherCard({
   day,
@@ -16,10 +16,10 @@ function DailyWeatherCard({
   tempUnit: string;
 }) {
   const weatherIcon =
-    minTemp === "--" ? "unknown" : getWeatherIcon(weatherCode) || "sunny";
-  const temp = tempUnit === "imperial" ? "FAHRENHEIT" : "CELSIUS";
+    minTemp === '--' ? 'unknown' : getWeatherIcon(weatherCode) || 'sunny';
+  const temp = tempUnit === 'imperial' ? 'FAHRENHEIT' : 'CELSIUS';
   return (
-    <li className="p-2.5 flex flex-col gap-4 bg-neutral-800 border border-neutral-600 rounded-12">
+    <li className="rounded-12 flex flex-col gap-4 border border-neutral-600 bg-neutral-800 p-2.5">
       <p className="text-500 text-center">{day}</p>
       <Image
         src={`/assets/images/icon-${weatherIcon}.webp`}
@@ -28,15 +28,15 @@ function DailyWeatherCard({
         height={60}
         className="mx-auto"
       />
-      <div className="flex items-center justify-between text-400 text-neutral-200">
+      <div className="text-400 flex items-center justify-between text-neutral-200">
         <p>
           <span className="sr-only">MINIMUM TEMPERATURE:</span>
-          {`${minTemp}${typeof minTemp === "number" ? "°" : ""}`}{" "}
+          {`${minTemp}${typeof minTemp === 'number' ? '°' : ''}`}{' '}
           <span className="sr-only">{temp}</span>
         </p>
         <p>
           <span className="sr-only">MAXIMUM TEMPERATURE:</span>
-          {`${maxTemp}${typeof maxTemp === "number" ? "°" : ""}`}{" "}
+          {`${maxTemp}${typeof maxTemp === 'number' ? '°' : ''}`}{' '}
           <span className="sr-only">{temp}</span>
         </p>
       </div>

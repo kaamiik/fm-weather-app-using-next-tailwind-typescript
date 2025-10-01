@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 function DetailsCard({
   label,
@@ -8,8 +8,8 @@ function DetailsCard({
   value: string | null;
 }) {
   return (
-    <div className="flex flex-col items-start  gap-6 rounded-12 p-5 xl:py-5 xl:px-2 pe-0 bg-neutral-800 border border-neutral-600">
-      <dt className="text-neutral-200 text-500 font-medium">{label}</dt>
+    <div className="rounded-12 flex flex-col items-start gap-6 border border-neutral-600 bg-neutral-800 p-5 pe-0 xl:px-2 xl:py-5">
+      <dt className="text-500 font-medium text-neutral-200">{label}</dt>
       <dd className="text-600 xl:text-800 font-light">{value}</dd>
     </div>
   );

@@ -1,6 +1,6 @@
-"use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import * as React from "react";
+'use client';
+import { useRouter, useSearchParams } from 'next/navigation';
+import * as React from 'react';
 import {
   MenuTrigger,
   Menu,
@@ -10,15 +10,15 @@ import {
   Separator,
   Button,
   Popover,
-} from "react-aria-components";
+} from 'react-aria-components';
 
 function UnitSettings() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const temperature = searchParams.get("temp") || "metric";
-  const windSpeed = searchParams.get("wind") || "metric";
-  const precipitation = searchParams.get("precip") || "metric";
+  const temperature = searchParams.get('temp') || 'metric';
+  const windSpeed = searchParams.get('wind') || 'metric';
+  const precipitation = searchParams.get('precip') || 'metric';
 
   const selectedKeys = new Set([
     `${temperature}-temp`,
@@ -48,11 +48,11 @@ function UnitSettings() {
   }
 
   function handleSwitch() {
-    const unit = temperature === "metric" ? "imperial" : "metric";
+    const unit = temperature === 'metric' ? 'imperial' : 'metric';
     const params = new URLSearchParams(searchParams.toString());
-    params.set("temp", unit);
-    params.set("wind", unit);
-    params.set("precip", unit);
+    params.set('temp', unit);
+    params.set('wind', unit);
+    params.set('precip', unit);
     router.replace(`?${params.toString()}`, { scroll: false });
   }
 
@@ -67,14 +67,14 @@ function UnitSettings() {
   return (
     <form action="" onSubmit={(e) => e.preventDefault()}>
       <MenuTrigger>
-        <Button className="bg-neutral-800 rounded-6 md:rounded-8 px-2.5 py-2 md:px-3 md:py-4 flex items-center gap-1.5 md:gap-2.5 cursor-pointer hover:bg-neutral-700 outline-0 focus:shadow-(--my-shadow-menu-button) group">
+        <Button className="rounded-6 md:rounded-8 group flex cursor-pointer items-center gap-1.5 bg-neutral-800 px-2.5 py-2 outline-0 hover:bg-neutral-700 focus:shadow-(--my-shadow-menu-button) md:gap-2.5 md:px-3 md:py-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
             fill="none"
             viewBox="0 0 16 16"
-            className="transition-transform duration-150 ease-out motion-reduce:transition-none group-aria-expanded:rotate-45"
+            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-45 motion-reduce:transition-none"
           >
             <path
               fill="#fff"
@@ -88,7 +88,7 @@ function UnitSettings() {
             height="8"
             fill="none"
             viewBox="0 0 13 8"
-            className="transition-transform duration-150 ease-out motion-reduce:transition-none group-aria-expanded:rotate-180"
+            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-180 motion-reduce:transition-none"
           >
             <path
               fill="#fff"
@@ -103,114 +103,114 @@ function UnitSettings() {
             selectedKeys={selectedKeys}
             disallowEmptySelection
             onAction={(key) => {
-              if (key === "switch") {
+              if (key === 'switch') {
                 handleSwitch();
               }
             }}
-            className="px-2 py-1.5 bg-neutral-800 rounded-10 md:rounded-12 border border-neutral-600 shadow-lg text-300 md:text-400 min-w-[10.5rem] outline-0"
+            className="rounded-10 md:rounded-12 text-300 md:text-400 min-w-[10.5rem] border border-neutral-600 bg-neutral-800 px-2 py-1.5 shadow-lg outline-0"
           >
             <MenuItem
               id="switch"
-              className="px-2 py-2.5 cursor-pointer rounded-8 hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
+              className="rounded-8 cursor-pointer px-2 py-2.5 outline-0 hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
             >
               {allUnitsSame
-                ? temperature === "metric"
-                  ? "Switch to Imperial"
-                  : "Switch to Metric"
-                : "Reset to Default"}
+                ? temperature === 'metric'
+                  ? 'Switch to Imperial'
+                  : 'Switch to Metric'
+                : 'Reset to Default'}
             </MenuItem>
 
             <MenuSection>
-              <Header className="pt-1.5 px-2 text-300 text-neutral-300">
+              <Header className="text-300 px-2 pt-1.5 text-neutral-300">
                 Temperature
               </Header>
               <MenuItem
                 id="metric-temp"
-                onAction={() => handleUnitChange("temp", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  temperature === "metric"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('temp', 'metric')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  temperature === 'metric'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 Celsius
-                <CheckMark isSelected={temperature === "metric"} />
+                <CheckMark isSelected={temperature === 'metric'} />
               </MenuItem>
               <MenuItem
                 id="imperial-temp"
-                onAction={() => handleUnitChange("temp", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  temperature === "imperial"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('temp', 'imperial')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  temperature === 'imperial'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 Fahrenheit
-                <CheckMark isSelected={temperature === "imperial"} />
+                <CheckMark isSelected={temperature === 'imperial'} />
               </MenuItem>
             </MenuSection>
 
             <Separator className="my-1 border border-neutral-600" />
 
             <MenuSection>
-              <Header className="pt-1.5 px-2 text-300 text-neutral-300">
+              <Header className="text-300 px-2 pt-1.5 text-neutral-300">
                 Wind Speed
               </Header>
               <MenuItem
                 id="metric-wind"
-                onAction={() => handleUnitChange("wind", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  windSpeed === "metric"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('wind', 'metric')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  windSpeed === 'metric'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 Km/h
-                <CheckMark isSelected={windSpeed === "metric"} />
+                <CheckMark isSelected={windSpeed === 'metric'} />
               </MenuItem>
               <MenuItem
                 id="imperial-wind"
-                onAction={() => handleUnitChange("wind", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  windSpeed === "imperial"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('wind', 'imperial')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  windSpeed === 'imperial'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 mph
-                <CheckMark isSelected={windSpeed === "imperial"} />
+                <CheckMark isSelected={windSpeed === 'imperial'} />
               </MenuItem>
             </MenuSection>
 
             <Separator className="my-1 border border-neutral-600" />
 
             <MenuSection>
-              <Header className="pt-1.5 px-2 text-300 text-neutral-300">
+              <Header className="text-300 px-2 pt-1.5 text-neutral-300">
                 Precipitation
               </Header>
               <MenuItem
                 id="metric-precip"
-                onAction={() => handleUnitChange("precip", "metric")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  precipitation === "metric"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('precip', 'metric')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  precipitation === 'metric'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 Millimeters
-                <CheckMark isSelected={precipitation === "metric"} />
+                <CheckMark isSelected={precipitation === 'metric'} />
               </MenuItem>
               <MenuItem
                 id="imperial-precip"
-                onAction={() => handleUnitChange("precip", "imperial")}
-                className={`py-2.5 px-2 flex items-center justify-between rounded-8 mt-2 cursor-pointer outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
-                  precipitation === "imperial"
-                    ? "bg-neutral-700"
-                    : "hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700"
+                onAction={() => handleUnitChange('precip', 'imperial')}
+                className={`rounded-8 mt-2 flex cursor-pointer items-center justify-between px-2 py-2.5 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item) ${
+                  precipitation === 'imperial'
+                    ? 'bg-neutral-700'
+                    : 'hover:bg-neutral-700 data-[focus-visible]:bg-neutral-700'
                 }`}
               >
                 Inches
-                <CheckMark isSelected={precipitation === "imperial"} />
+                <CheckMark isSelected={precipitation === 'imperial'} />
               </MenuItem>
             </MenuSection>
           </Menu>

@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
 function MaxWidthWrapper({
   children,
-  as: Tag = "div",
-  className = "",
+  as: Tag = 'div',
+  className = '',
   ...delegated
 }: {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ function MaxWidthWrapper({
   className?: string;
 }) {
   return (
-    <Tag {...delegated} className={`max-w-[76rem] mx-auto ${className}`}>
+    <Tag {...delegated} className={`mx-auto max-w-[76rem] ${className}`}>
       {children}
     </Tag>
   );

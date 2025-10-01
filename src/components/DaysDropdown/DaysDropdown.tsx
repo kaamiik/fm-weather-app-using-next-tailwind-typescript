@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Button,
   Label,
@@ -9,7 +9,7 @@ import {
   Popover,
   Select,
   SelectValue,
-} from "react-aria-components";
+} from 'react-aria-components';
 
 type DaysDropdownProps = {
   selectedDay: string | undefined;
@@ -33,9 +33,9 @@ function DaysDropdown({
         onSelectionChange={(key) => onDayChange?.(key as string)}
       >
         <Label className="sr-only">Choose a day</Label>
-        <Button className="py-2 px-4 flex items-center gap-3 bg-neutral-700 text-400 rounded-8 cursor-pointer hover:bg-neutral-600 outline-0 focus:shadow-(--my-shadow-menu-button) group">
+        <Button className="text-400 rounded-8 group flex cursor-pointer items-center gap-3 bg-neutral-700 px-4 py-2 outline-0 hover:bg-neutral-600 focus:shadow-(--my-shadow-menu-button)">
           <SelectValue>
-            {({ selectedText }) => selectedText || "Select a day"}
+            {({ selectedText }) => selectedText || 'Select a day'}
           </SelectValue>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +43,7 @@ function DaysDropdown({
             height="8"
             fill="none"
             viewBox="0 0 13 8"
-            className="transition-transform duration-150 ease-out motion-reduce:transition-none group-aria-expanded:rotate-180"
+            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-180 motion-reduce:transition-none"
           >
             <path
               fill="#fff"
@@ -52,13 +52,13 @@ function DaysDropdown({
           </svg>
         </Button>
         <Popover placement="bottom end">
-          <ListBox className="bg-neutral-700 border border-neutral-700 p-2 rounded-12 min-w-[13.375rem] shadow-lg">
+          <ListBox className="rounded-12 min-w-[13.375rem] border border-neutral-700 bg-neutral-700 p-2 shadow-lg">
             {availableDays.map((day) => (
               <ListBoxItem
                 key={day}
                 id={day}
                 textValue={day}
-                className="py-2.5 px-2 rounded-8 cursor-pointer hover:bg-neutral-600 data-[focus-visible]:bg-neutral-600 outline-0 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
+                className="rounded-8 cursor-pointer px-2 py-2.5 outline-0 hover:bg-neutral-600 data-[focus-visible]:bg-neutral-600 data-[focus-visible]:shadow-(--my-shadow-menu-item)"
               >
                 {day}
               </ListBoxItem>

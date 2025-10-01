@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 export default function Error({ reset }: { reset: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 py-10 text-center mt-12">
+    <div className="mt-12 flex flex-col items-center justify-center gap-6 py-10 text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -22,7 +22,7 @@ export default function Error({ reset }: { reset: () => void }) {
       </p>
       <button
         onClick={() => reset()}
-        className="flex items-center gap-2.5 py-3 px-4 bg-neutral-800 hover:bg-neutral-600 rounded-8 cursor-pointer"
+        className="rounded-8 flex cursor-pointer items-center gap-2.5 bg-neutral-800 px-4 py-3 hover:bg-neutral-600"
       >
         <svg
           width="16"

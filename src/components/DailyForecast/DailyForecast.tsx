@@ -1,6 +1,6 @@
-import * as React from "react";
-import DailyWeatherCard from "../DailyWeatherCard";
-import { getDayNames } from "@/utils/utils";
+import * as React from 'react';
+import DailyWeatherCard from '../DailyWeatherCard';
+import { getDayNames } from '@/utils/utils';
 
 type DailyForecastProps = {
   daily?: {
@@ -15,8 +15,8 @@ type DailyForecastProps = {
 
 function DailyForecast({
   daily,
-  tempUnit = "metric",
-  className = "",
+  tempUnit = 'metric',
+  className = '',
 }: DailyForecastProps) {
   const dayNames = getDayNames(daily);
   return (
@@ -24,7 +24,7 @@ function DailyForecast({
       <h3 id="daily-forecast-heading" className="text-600 font-semibold">
         Daily forecast
       </h3>
-      <ul className="mt-5 grid gap-4 grid-cols-(--my-grid-cols-daily)">
+      <ul className="mt-5 grid grid-cols-(--my-grid-cols-daily) gap-4">
         {daily
           ? daily.time.map((_, index) => (
               <DailyWeatherCard

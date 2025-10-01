@@ -1,2 +1,2 @@
-export * from "./DailyWeatherCard";
-export { default } from "./DailyWeatherCard";
+export * from './DailyWeatherCard';
+export { default } from './DailyWeatherCard';

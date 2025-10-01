@@ -25,16 +25,16 @@ export function correctLocationData(location: LocationData) {
   let country = location.country;
 
   if (!country && location.country_code) {
-    if (location.country_code === "PS") {
-      country = "Palestine";
+    if (location.country_code === 'PS') {
+      country = 'Palestine';
     } else {
       country = location.country_code;
     }
   }
 
   if (
-    location.admin1 === "undefined" ||
-    location.admin1 === "null" ||
+    location.admin1 === 'undefined' ||
+    location.admin1 === 'null' ||
     !location.admin1
   ) {
     location = { ...location, admin1: undefined };
@@ -47,7 +47,7 @@ export function correctLocationData(location: LocationData) {
 export function formatLocationDisplay(location: LocationData) {
   const corrected = correctLocationData(location);
   const country =
-    corrected.country || corrected.country_code || "Unknown Region";
+    corrected.country || corrected.country_code || 'Unknown Region';
 
   const parts = [corrected.name];
   if (corrected.admin1 && corrected.admin1 !== corrected.name) {
@@ -61,15 +61,15 @@ export function formatLocationDisplay(location: LocationData) {
   }
   parts.push(country);
 
-  return parts.join(", ");
+  return parts.join(', ');
 }
 
 // For input value when selected (shorter: name, country)
 export function formatLocationForSearch(location: LocationData): string {
   const corrected = correctLocationData(location);
-  const name = corrected.name || "Unknown Location";
+  const name = corrected.name || 'Unknown Location';
   const country =
-    corrected.country || corrected.country_code || "Unknown Region";
+    corrected.country || corrected.country_code || 'Unknown Region';
 
   return `${name}, ${country}`;
 }
@@ -81,9 +81,9 @@ export function formatLocationForURL(location: LocationData): string {
   if (corrected.admin1 && corrected.admin1 !== corrected.name) {
     parts.push(corrected.admin1);
   }
-  parts.push(corrected.country || corrected.country_code || "Unknown Region");
+  parts.push(corrected.country || corrected.country_code || 'Unknown Region');
 
-  return parts.join(", ");
+  return parts.join(', ');
 }
 
 // Reverse Geocoding
@@ -97,13 +97,13 @@ export async function reverseGeocode(
     );
 
     if (!response.ok) {
-      throw new Error("Reverse geocoding failed");
+      throw new Error('Reverse geocoding failed');
     }
     const data: NominatimResponse = await response.json();
     return formatPlaceFromNominatim(data);
   } catch (error) {
-    console.error("Reverse geocoding error:", error);
-    return "Current Location";
+    console.error('Reverse geocoding error:', error);
+    return 'Current Location';
   }
 }
 
@@ -126,51 +126,51 @@ export function formatPlaceFromNominatim(data: NominatimResponse) {
     parts.push(address.country);
   }
 
-  return parts.length > 0 ? parts.join(", ") : "Current Location";
+  return parts.length > 0 ? parts.join(', ') : 'Current Location';
 }
 
 // Flag from country_code
 export function getFlagUrl(
   flagCode?: string,
-  size: "small" | "medium" | "large" = "medium"
+  size: 'small' | 'medium' | 'large' = 'medium'
 ): string | null {
   if (!flagCode) return null;
 
-  const sizes = { small: "20", medium: "40", large: "80" };
+  const sizes = { small: '20', medium: '40', large: '80' };
   return `https://flagcdn.com/w${sizes[size]}/${flagCode.toLowerCase()}.png`;
 }
 
 export function getWeatherIcon(weatherCode: number): string {
-  if (weatherCode === 0) return "sunny";
-  if (weatherCode >= 1 && weatherCode <= 3) return "partly-cloudy";
-  if (weatherCode >= 45 && weatherCode <= 48) return "fog";
-  if (weatherCode >= 51 && weatherCode <= 67) return "drizzle";
-  if (weatherCode >= 71 && weatherCode <= 77) return "snow";
-  if (weatherCode >= 80 && weatherCode <= 82) return "rain";
-  if (weatherCode >= 85 && weatherCode <= 86) return "snow";
-  if (weatherCode >= 95 && weatherCode <= 99) return "storm";
-  if (weatherCode === 3) return "overcast";
+  if (weatherCode === 0) return 'sunny';
+  if (weatherCode >= 1 && weatherCode <= 3) return 'partly-cloudy';
+  if (weatherCode >= 45 && weatherCode <= 48) return 'fog';
+  if (weatherCode >= 51 && weatherCode <= 67) return 'drizzle';
+  if (weatherCode >= 71 && weatherCode <= 77) return 'snow';
+  if (weatherCode >= 80 && weatherCode <= 82) return 'rain';
+  if (weatherCode >= 85 && weatherCode <= 86) return 'snow';
+  if (weatherCode >= 95 && weatherCode <= 99) return 'storm';
+  if (weatherCode === 3) return 'overcast';
 
-  return "partly-cloudy";
+  return 'partly-cloudy';
 }
 
 export function getTemperatureUnit(tempUnit?: string): string {
-  return tempUnit === "imperial" ? "FAHRENHEIT" : "CELSIUS";
+  return tempUnit === 'imperial' ? 'FAHRENHEIT' : 'CELSIUS';
 }
 
 // Only name + country
 export function cleanPlaceName(place: string | undefined): string {
-  if (!place) return "Select a location";
+  if (!place) return 'Select a location';
 
   const cleaned =
     decodeURIComponent(place)
-      .replace(/,\s*undefined/gi, "")
-      .replace(/undefined,?\s*/gi, "")
-      .replace(/,\s*,/g, ",")
-      .replace(/^,\s*|,\s*$/g, "")
-      .trim() || "Selected Location";
+      .replace(/,\s*undefined/gi, '')
+      .replace(/undefined,?\s*/gi, '')
+      .replace(/,\s*,/g, ',')
+      .replace(/^,\s*|,\s*$/g, '')
+      .trim() || 'Selected Location';
 
-  const parts = cleaned.split(",");
+  const parts = cleaned.split(',');
   if (parts.length >= 3) {
     const name = parts[0].trim();
     const middle = parts[1].trim();
@@ -191,7 +191,7 @@ export function getDayNames(daily?: {
 
   return daily.time.map((dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", { weekday: "short" });
+    return date.toLocaleDateString('en-US', { weekday: 'short' });
   });
 }
 
@@ -205,7 +205,7 @@ export function getCurrentDay(hourly?: Houly) {
   if (!hourly?.time?.[0]) return;
 
   const firstDate = new Date(hourly.time[0]);
-  return firstDate.toLocaleDateString("en-Us", { weekday: "long" });
+  return firstDate.toLocaleDateString('en-Us', { weekday: 'long' });
 }
 
 export function getAvailableDays(hourly?: Houly) {
@@ -215,7 +215,7 @@ export function getAvailableDays(hourly?: Houly) {
 
   hourly.time.forEach((timeStr) => {
     const date = new Date(timeStr);
-    const dayName = date.toLocaleDateString("en-Us", { weekday: "long" });
+    const dayName = date.toLocaleDateString('en-Us', { weekday: 'long' });
     uniqueDays.add(dayName);
   });
 
@@ -225,11 +225,11 @@ export function getAvailableDays(hourly?: Houly) {
 export function formatHour(timeStr: string) {
   const date = new Date(timeStr);
   return date
-    .toLocaleTimeString("en-US", {
-      hour: "numeric",
+    .toLocaleTimeString('en-US', {
+      hour: 'numeric',
       hour12: true,
     })
-    .replace(" ", "");
+    .replace(' ', '');
 }
 
 export function getHoursForDay(
@@ -247,7 +247,7 @@ export function getHoursForDay(
   return hourly.time
     .map((timeStr, index) => {
       const date = new Date(timeStr);
-      const dayName = date.toLocaleDateString("en-US", { weekday: "long" });
+      const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
       return { timeStr, dayName, index };
     })
     .filter(({ dayName }) => dayName === day)
@@ -263,22 +263,22 @@ export function formatTime(isoString: string): string {
 
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  return `${hours}:${minutes.toString().padStart(2, "0")}`;
+  return `${hours}:${minutes.toString().padStart(2, '0')}`;
 }
 
 export function getAQICategory(aqi: number): string {
-  if (aqi <= 20) return "Good";
-  if (aqi <= 40) return "Fair";
-  if (aqi <= 60) return "Mod";
-  if (aqi <= 80) return "Poor";
-  if (aqi <= 100) return "Bad";
-  return "Severe";
+  if (aqi <= 20) return 'Good';
+  if (aqi <= 40) return 'Fair';
+  if (aqi <= 60) return 'Mod';
+  if (aqi <= 80) return 'Poor';
+  if (aqi <= 100) return 'Bad';
+  return 'Severe';
 }
 
 export function getUVCategory(uvIndex: number): string {
-  if (uvIndex <= 2) return "Low";
-  if (uvIndex <= 5) return "Mod";
-  if (uvIndex <= 7) return "High";
-  if (uvIndex <= 10) return "Intense";
-  return "Extreme";
+  if (uvIndex <= 2) return 'Low';
+  if (uvIndex <= 5) return 'Mod';
+  if (uvIndex <= 7) return 'High';
+  if (uvIndex <= 10) return 'Intense';
+  return 'Extreme';
 }

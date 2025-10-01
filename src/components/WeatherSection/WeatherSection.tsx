@@ -1,9 +1,9 @@
-import WeatherInfo from "@/components/WeatherInfo";
-import WeatherDetails from "@/components/WeatherDetails";
-import DailyForecast from "@/components/DailyForecast";
-import HourlyForecast from "@/components/HourlyForecast";
-import { fetchWeatherData } from "@/utils/fetchWeatherData";
-import type { WeatherData } from "@/types/weather";
+import WeatherInfo from '@/components/WeatherInfo';
+import WeatherDetails from '@/components/WeatherDetails';
+import DailyForecast from '@/components/DailyForecast';
+import HourlyForecast from '@/components/HourlyForecast';
+import { fetchWeatherData } from '@/utils/fetchWeatherData';
+import type { WeatherData } from '@/types/weather';
 
 type Props = {
   place?: string;
@@ -27,26 +27,26 @@ export default async function WeatherSection({
   const weatherData: string | WeatherData = await fetchWeatherData(
     lat,
     long,
-    temp || "metric",
-    wind || "metric",
-    precip || "metric"
+    temp || 'metric',
+    wind || 'metric',
+    precip || 'metric'
   );
 
   if (
-    typeof weatherData === "string" ||
+    typeof weatherData === 'string' ||
     !weatherData ||
     !weatherData.current ||
     !weatherData.daily ||
     !weatherData.hourly
   ) {
     return (
-      <p className="text-center text-700 font-bold">No search result found!</p>
+      <p className="text-700 text-center font-bold">No search result found!</p>
     );
   }
 
   if (weatherData.current.temperature_2m === undefined) {
     return (
-      <p className="text-center text-700 font-bold">No search result found!</p>
+      <p className="text-700 text-center font-bold">No search result found!</p>
     );
   }
 
@@ -71,14 +71,14 @@ export default async function WeatherSection({
       <DailyForecast
         daily={weatherData.daily}
         tempUnit={temp}
-        className="xl:col-start-1 xl:row-start-2 self-end"
+        className="self-end xl:col-start-1 xl:row-start-2"
       />
 
       <HourlyForecast
         hourly={weatherData.hourly}
         tempUnit={temp}
         selectedDay={day}
-        className="xl:col-start-2 xl:row-span-full max-h-[45rem] xl:max-h-none xl:contain-size"
+        className="max-h-[45rem] xl:col-start-2 xl:row-span-full xl:max-h-none xl:contain-size"
       />
     </div>
   );

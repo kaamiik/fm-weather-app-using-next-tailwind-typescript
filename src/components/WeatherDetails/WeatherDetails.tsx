@@ -1,6 +1,6 @@
-import * as React from "react";
-import DetailsCard from "../DetailsCard";
-import { formatTime, getAQICategory, getUVCategory } from "@/utils/utils";
+import * as React from 'react';
+import DetailsCard from '../DetailsCard';
+import { formatTime, getAQICategory, getUVCategory } from '@/utils/utils';
 
 type WeatherDetailsProps = {
   current?: {
@@ -30,9 +30,9 @@ function WeatherDetails({
 }: WeatherDetailsProps) {
   if (!current) return null;
 
-  const tempSymbol = tempUnit === "imperial" ? "°F" : "°C";
-  const windSymbol = windUnit === "imperial" ? " mph" : " km/h";
-  const precipSymbol = precipUnit === "imperial" ? " in" : " mm";
+  const tempSymbol = tempUnit === 'imperial' ? '°F' : '°C';
+  const windSymbol = windUnit === 'imperial' ? ' mph' : ' km/h';
+  const precipSymbol = precipUnit === 'imperial' ? ' in' : ' mm';
 
   const uvIndex = daily?.uv_index_max?.[0];
   const uvDisplay =
@@ -45,7 +45,7 @@ function WeatherDetails({
 
   const visibility =
     current.visibility !== undefined
-      ? windUnit === "imperial"
+      ? windUnit === 'imperial'
         ? `${(current.visibility / 1609.34).toFixed(1)} mi`
         : `${(current.visibility / 1000).toFixed(1)} km`
       : null;
@@ -61,40 +61,40 @@ function WeatherDetails({
       <h3 id="current-conditions-heading" className="sr-only">
         Current Weather Conditions
       </h3>
-      <dl className="grid gap-4 grid-cols-(--my-grid-cols-info)">
+      <dl className="grid grid-cols-(--my-grid-cols-info) gap-4">
         <DetailsCard
           label="Feels Like"
           value={
             current
               ? `${Math.round(current.apparent_temperature)}${tempSymbol}`
-              : "--"
+              : '--'
           }
         />
         <DetailsCard
           label="Humidity"
-          value={current ? `${current.relative_humidity_2m}%` : "--"}
+          value={current ? `${current.relative_humidity_2m}%` : '--'}
         />
         <DetailsCard
           label="Wind"
           value={
             current
               ? `${Math.round(current.wind_speed_10m)}${windSymbol}`
-              : "--"
+              : '--'
           }
         />
         <DetailsCard
           label="Precipitation"
-          value={current ? `${current.precipitation}${precipSymbol}` : "--"}
+          value={current ? `${current.precipitation}${precipSymbol}` : '--'}
         />
         <DetailsCard
           label="UV Index"
-          value={uvIndex !== undefined ? uvDisplay : "--"}
+          value={uvIndex !== undefined ? uvDisplay : '--'}
         />
-        <DetailsCard label="Visibility" value={visibility || "--"} />
-        <DetailsCard label="Air Quality" value={aqiDisplay || "--"} />
+        <DetailsCard label="Visibility" value={visibility || '--'} />
+        <DetailsCard label="Air Quality" value={aqiDisplay || '--'} />
         <DetailsCard
           label="Sun Times"
-          value={sunrise && sunset ? `${sunrise}/ ${sunset}` : "--"}
+          value={sunrise && sunset ? `${sunrise}/ ${sunset}` : '--'}
         />
       </dl>
     </section>

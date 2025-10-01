@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Colors */
@@ -44,14 +44,14 @@
   --breakpoint-xl: 76.5rem;
   /* Box Shadow */
   --shadow-lg: 0 8px 16px rgba(2, 1, 44, 32%);
-  --my-shadow-button: 0 0 0 3px var(--color-neutral-900),
-    0 0 0 5px var(--color-blue-500);
-  --my-shadow-input: 0 0 0 3px var(--color-neutral-900),
-    0 0 0 5px var(--color-neutral-0);
-  --my-shadow-menu-button: 0 0 0 3px var(--color-neutral-900),
-    0 0 0 5px var(--color-neutral-0);
-  --my-shadow-menu-item: 0 0 0 1px var(--color-neutral-900),
-    0 0 0 2px var(--color-neutral-0);
+  --my-shadow-button:
+    0 0 0 3px var(--color-neutral-900), 0 0 0 5px var(--color-blue-500);
+  --my-shadow-input:
+    0 0 0 3px var(--color-neutral-900), 0 0 0 5px var(--color-neutral-0);
+  --my-shadow-menu-button:
+    0 0 0 3px var(--color-neutral-900), 0 0 0 5px var(--color-neutral-0);
+  --my-shadow-menu-item:
+    0 0 0 1px var(--color-neutral-900), 0 0 0 2px var(--color-neutral-0);
   /* Grid */
   --my-grid-cols-info: repeat(auto-fit, minmax(9.5rem, 1fr));
   --my-grid-cols-daily: repeat(auto-fit, minmax(5.25rem, 1fr));
