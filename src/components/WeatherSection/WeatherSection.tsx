@@ -52,13 +52,7 @@ export default async function WeatherSection({
 
   return (
     <div className="grid gap-8 xl:grid-cols-[2fr_1fr] xl:grid-rows-[auto_auto] xl:gap-8">
-      <section
-        aria-labelledby="current-weather-heading"
-        className="grid gap-5 xl:col-start-1 xl:row-start-1"
-      >
-        <h2 id="current-weather-heading" className="sr-only">
-          Current Weather Information
-        </h2>
+      <div className="grid gap-5 xl:col-start-1 xl:row-start-1">
         <WeatherInfo
           place={place}
           current={weatherData.current}
@@ -72,7 +66,7 @@ export default async function WeatherSection({
           windUnit={wind}
           precipUnit={precip}
         />
-      </section>
+      </div>
 
       <DailyForecast
         daily={weatherData.daily}

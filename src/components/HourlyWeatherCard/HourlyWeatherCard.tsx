@@ -20,9 +20,7 @@ function HourlyWeatherCard({
       <div className="flex items-center gap-2">
         <Image
           src={`/assets/images/icon-${weatherIcon}.webp`}
-          alt={
-            hour === "--" ? "Loading weather data" : `Weather: ${weatherIcon}`
-          }
+          alt={hour === "--" ? "Loading weather data" : weatherIcon}
           width={40}
           height={40}
         />

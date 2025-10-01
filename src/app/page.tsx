@@ -4,6 +4,8 @@ import React from "react";
 import WeatherSection from "@/components/WeatherSection";
 import GeolocationHandler from "@/components/GeolocationHandler";
 import WeatherSkeleton from "@/components/WeatherSkeleton";
+import type { Metadata } from "next";
+import { cleanPlaceName } from "@/utils/utils";
 
 type SearchParams = {
   place?: string;
@@ -15,6 +17,23 @@ type SearchParams = {
   day?: string;
   loading?: string;
 };
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}): Promise<Metadata> {
+  const { place } = await searchParams;
+
+  const cleanPlace = place ? cleanPlaceName(place) : null;
+
+  return {
+    title: cleanPlace ? `${cleanPlace}|Weather Now` : "Weather Now",
+    description: cleanPlace
+      ? `Current weather conditions, hourly and daily forecast for ${cleanPlace}`
+      : "Search for any location to get current weather conditions and forecasts",
+  };
+}
 
 export default async function Home({
   searchParams,

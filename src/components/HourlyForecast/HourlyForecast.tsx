@@ -57,7 +57,7 @@ function HourlyForecast({
       </div>
       <ul
         aria-live="polite"
-        className="grid gap-4 relative overflow-y-auto scroll-bar"
+        className="grid gap-4 relative overflow-y-auto scroll-bar outline-0 focus:shadow-(--my-shadow-menu-button) group"
       >
         {hoursToDisplay.length > 0
           ? hoursToDisplay.map((hourData, index) => (

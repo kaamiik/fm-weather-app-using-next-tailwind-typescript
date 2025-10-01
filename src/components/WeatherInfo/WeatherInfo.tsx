@@ -32,7 +32,7 @@ function WeatherInfo({
   return (
     <div className="py-10 px-6 md:py-20 bg-[url(/assets/images/bg-today-small.svg)] sm:bg-[url(/assets/images/bg-today-large.svg)] bg-no-repeat bg-cover rounded-20 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
       <div className="text-center flex flex-col gap-3 md:text-start md:gap-6 max-w-[24rem]">
-        <p className="text-700 font-bold">{displayPlace}</p>
+        <h2 className="text-700 font-bold">{displayPlace}</h2>
         <time className="text-500 font-medium" dateTime={formattedDate}>
           {formattedDate}
         </time>
@@ -40,14 +40,14 @@ function WeatherInfo({
       <div className="flex items-center gap-4">
         <Image
           src={`/assets/images/icon-${weatherIcon}.webp`}
-          alt={`Weather: ${weatherIcon}`}
+          alt={weatherIcon}
           width={120}
           height={120}
         />
-        <h2 className="text-900 tn:text-1000 font-semibold italic">
+        <p className="text-900 tn:text-1000 font-semibold italic">
           {`${temperature}°`}
           <span className="sr-only">{unit}</span>
-        </h2>
+        </p>
       </div>
     </div>
   );

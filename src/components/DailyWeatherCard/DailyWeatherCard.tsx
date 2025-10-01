@@ -23,7 +23,7 @@ function DailyWeatherCard({
       <p className="text-500 text-center">{day}</p>
       <Image
         src={`/assets/images/icon-${weatherIcon}.webp`}
-        alt={`Weather: ${weatherIcon}`}
+        alt={weatherIcon}
         width={60}
         height={60}
         className="mx-auto"

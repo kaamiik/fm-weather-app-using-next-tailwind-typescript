@@ -57,40 +57,47 @@ function WeatherDetails({
       : null;
 
   return (
-    <dl className="grid gap-4 grid-cols-(--my-grid-cols-info)">
-      <DetailsCard
-        label="Feels Like"
-        value={
-          current
-            ? `${Math.round(current.apparent_temperature)}${tempSymbol}`
-            : "--"
-        }
-      />
-      <DetailsCard
-        label="Humidity"
-        value={current ? `${current.relative_humidity_2m}%` : "--"}
-      />
-      <DetailsCard
-        label="Wind"
-        value={
-          current ? `${Math.round(current.wind_speed_10m)}${windSymbol}` : "--"
-        }
-      />
-      <DetailsCard
-        label="Precipitation"
-        value={current ? `${current.precipitation}${precipSymbol}` : "--"}
-      />
-      <DetailsCard
-        label="UV Index"
-        value={uvIndex !== undefined ? uvDisplay : "--"}
-      />
-      <DetailsCard label="Visibility" value={visibility || "--"} />
-      <DetailsCard label="Air Quality" value={aqiDisplay || "--"} />
-      <DetailsCard
-        label="Sun Times"
-        value={sunrise && sunset ? `${sunrise}/ ${sunset}` : "--"}
-      />
-    </dl>
+    <section aria-labelledby="current-conditions-heading">
+      <h3 id="current-conditions-heading" className="sr-only">
+        Current Weather Conditions
+      </h3>
+      <dl className="grid gap-4 grid-cols-(--my-grid-cols-info)">
+        <DetailsCard
+          label="Feels Like"
+          value={
+            current
+              ? `${Math.round(current.apparent_temperature)}${tempSymbol}`
+              : "--"
+          }
+        />
+        <DetailsCard
+          label="Humidity"
+          value={current ? `${current.relative_humidity_2m}%` : "--"}
+        />
+        <DetailsCard
+          label="Wind"
+          value={
+            current
+              ? `${Math.round(current.wind_speed_10m)}${windSymbol}`
+              : "--"
+          }
+        />
+        <DetailsCard
+          label="Precipitation"
+          value={current ? `${current.precipitation}${precipSymbol}` : "--"}
+        />
+        <DetailsCard
+          label="UV Index"
+          value={uvIndex !== undefined ? uvDisplay : "--"}
+        />
+        <DetailsCard label="Visibility" value={visibility || "--"} />
+        <DetailsCard label="Air Quality" value={aqiDisplay || "--"} />
+        <DetailsCard
+          label="Sun Times"
+          value={sunrise && sunset ? `${sunrise}/ ${sunset}` : "--"}
+        />
+      </dl>
+    </section>
   );
 }
 

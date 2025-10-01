@@ -20,9 +20,15 @@ function UnitSettings() {
   const windSpeed = searchParams.get("wind") || "metric";
   const precipitation = searchParams.get("precip") || "metric";
 
+  const selectedKeys = new Set([
+    `${temperature}-temp`,
+    `${windSpeed}-wind`,
+    `${precipitation}-precip`,
+  ]);
+
   function CheckMark({ isSelected }: { isSelected: boolean }) {
     return (
-      <span>
+      <span aria-hidden="true">
         {isSelected ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -94,6 +100,8 @@ function UnitSettings() {
         <Popover placement="bottom end" className="overflow-y-auto">
           <Menu
             selectionMode="multiple"
+            selectedKeys={selectedKeys}
+            disallowEmptySelection
             onAction={(key) => {
               if (key === "switch") {
                 handleSwitch();
