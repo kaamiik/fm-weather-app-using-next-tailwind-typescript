@@ -79,7 +79,7 @@ function UnitSettings() {
             height="16"
             fill="none"
             viewBox="0 0 16 16"
-            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-45 motion-reduce:transition-none"
+            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-45 motion-reduce:transition-none motion-reduce:group-aria-expanded:rotate-none"
           >
             <path
               fill="#fff"
@@ -93,7 +93,7 @@ function UnitSettings() {
             height="8"
             fill="none"
             viewBox="0 0 13 8"
-            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-180 motion-reduce:transition-none"
+            className="transition-transform duration-150 ease-out group-aria-expanded:rotate-180 motion-reduce:transition-none motion-reduce:group-aria-expanded:rotate-none"
           >
             <path
               fill="#fff"

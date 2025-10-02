@@ -109,7 +109,7 @@ function SearchInput({
           height="21"
           fill="none"
           viewBox="0 0 21 21"
-          className="absolute top-[23px] left-6 transition-transform duration-300 ease-out peer-aria-expanded:scale-110 motion-reduce:transition-none"
+          className="absolute top-[23px] left-6 transition-transform duration-300 ease-out peer-aria-expanded:scale-120 motion-reduce:transition-none motion-reduce:peer-aria-expanded:scale-none"
         >
           <path
             fill="#D4D3D9"
@@ -150,7 +150,7 @@ function SearchInput({
                     height="16"
                     fill="none"
                     viewBox="0 0 16 16"
-                    className="animate-fast-spin"
+                    className="animate-fast-spin motion-reduce:animate-none"
                   >
                     <path
                       fill="#fff"
