@@ -93,7 +93,7 @@ function WeatherDetails({
         <DetailsCard label="Visibility" value={visibility || '--'} />
         <DetailsCard label="Air Quality" value={aqiDisplay || '--'} />
         <DetailsCard
-          label="Sun Times"
+          label="Sunrise/ Sunset"
           value={sunrise && sunset ? `${sunrise}/ ${sunset}` : '--'}
         />
       </dl>
