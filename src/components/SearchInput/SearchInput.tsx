@@ -182,7 +182,7 @@ function SearchInput({
                 {flagUrl && (
                   <Image
                     src={flagUrl}
-                    alt={`${location.country} flag`}
+                    alt=""
                     width={24}
                     height={24}
                     className="rounded-4"
