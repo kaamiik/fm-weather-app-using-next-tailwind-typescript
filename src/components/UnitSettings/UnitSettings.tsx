@@ -67,7 +67,7 @@ function UnitSettings() {
   const allUnitsSame = temperature === windSpeed && windSpeed === precipitation;
 
   return (
-    <form action="" onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <MenuTrigger>
         <Button
           isDisabled={isLoading}

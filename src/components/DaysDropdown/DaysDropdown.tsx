@@ -25,7 +25,7 @@ function DaysDropdown({
   }
 
   return (
-    <form action="" onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <Select
         selectedKey={selectedDay}
         onSelectionChange={(key) => onDayChange?.(key as string)}
