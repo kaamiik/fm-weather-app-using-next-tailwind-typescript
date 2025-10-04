@@ -11,14 +11,13 @@ import {
   Popover,
 } from 'react-aria-components';
 import { useAsyncList } from 'react-stately';
-
 import {
   correctLocationData,
   formatLocationDisplay,
   formatLocationForSearch,
   getFlagUrl,
-  type LocationData,
 } from '@/utils/utils';
+import type { LocationData } from '@/types/types';
 
 function SearchInput({
   onSelect,

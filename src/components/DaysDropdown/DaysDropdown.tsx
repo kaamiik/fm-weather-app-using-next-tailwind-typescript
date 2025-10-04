@@ -11,17 +11,15 @@ import {
   SelectValue,
 } from 'react-aria-components';
 
-type DaysDropdownProps = {
-  selectedDay: string | undefined;
-  availableDays: string[];
-  onDayChange?: (day: string) => void;
-};
-
 function DaysDropdown({
   selectedDay,
   availableDays,
   onDayChange,
-}: DaysDropdownProps) {
+}: {
+  selectedDay: string | undefined;
+  availableDays: string[];
+  onDayChange?: (day: string) => void;
+}) {
   if (availableDays.length === 0) {
     return null;
   }

@@ -1,25 +1,4 @@
-export type LocationData = {
-  id: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  country?: string;
-  country_code?: string;
-  admin1?: string;
-  admin2?: string;
-  admin3?: string;
-};
-
-type NominatimResponse = {
-  display_name: string;
-  address: {
-    town?: string;
-    city?: string;
-    state?: string;
-    country?: string;
-    country_code?: string;
-  };
-};
+import type { NominatimResponse, LocationData } from '@/types/types';
 
 export function correctLocationData(location: LocationData) {
   let country = location.country;

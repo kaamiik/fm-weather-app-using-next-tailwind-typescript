@@ -4,7 +4,8 @@ import * as React from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import SearchInput from '../SearchInput';
 import SearchButton from '../SearchButton';
-import { formatLocationForURL, type LocationData } from '@/utils/utils';
+import { formatLocationForURL } from '@/utils/utils';
+import type { LocationData } from '@/types/types';
 
 function SearchForm() {
   const searchParams = useSearchParams();

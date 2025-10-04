@@ -6,7 +6,12 @@ import HourlyWeatherCard from '../HourlyWeatherCard';
 import { getAvailableDays, getCurrentDay, getHoursForDay } from '@/utils/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-type HourlyForecastProps = {
+function HourlyForecast({
+  hourly,
+  tempUnit = 'metric',
+  selectedDay,
+  className = '',
+}: {
   hourly?: {
     time: string[];
     temperature_2m: number[];
@@ -15,14 +20,7 @@ type HourlyForecastProps = {
   tempUnit?: string;
   selectedDay?: string;
   className?: string;
-};
-
-function HourlyForecast({
-  hourly,
-  tempUnit = 'metric',
-  selectedDay,
-  className = '',
-}: HourlyForecastProps) {
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

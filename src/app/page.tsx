@@ -5,18 +5,8 @@ import WeatherSection from '@/components/WeatherSection';
 import GeolocationHandler from '@/components/GeolocationHandler';
 import WeatherSkeleton from '@/components/WeatherSkeleton';
 import type { Metadata } from 'next';
+import type { SearchParams } from '@/types/types';
 import { cleanPlaceName } from '@/utils/utils';
-
-type SearchParams = {
-  place?: string;
-  lat?: string;
-  long?: string;
-  temp?: string;
-  wind?: string;
-  precip?: string;
-  day?: string;
-  loading?: string;
-};
 
 export async function generateMetadata({
   searchParams,

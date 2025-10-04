@@ -2,7 +2,13 @@ import * as React from 'react';
 import DetailsCard from '../DetailsCard';
 import { formatTime, getAQICategory, getUVCategory } from '@/utils/utils';
 
-type WeatherDetailsProps = {
+function WeatherDetails({
+  current,
+  daily,
+  tempUnit,
+  windUnit,
+  precipUnit,
+}: {
   current?: {
     apparent_temperature: number;
     relative_humidity_2m: number;
@@ -19,15 +25,7 @@ type WeatherDetailsProps = {
   tempUnit?: string;
   windUnit?: string;
   precipUnit?: string;
-};
-
-function WeatherDetails({
-  current,
-  daily,
-  tempUnit,
-  windUnit,
-  precipUnit,
-}: WeatherDetailsProps) {
+}) {
   if (!current) return null;
 
   const tempSymbol = tempUnit === 'imperial' ? '°F' : '°C';

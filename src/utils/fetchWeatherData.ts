@@ -1,4 +1,4 @@
-import type { WeatherData } from '@/types/weather';
+import type { WeatherData } from '@/types/types';
 
 export async function fetchWeatherData(
   lat: string,
@@ -7,7 +7,6 @@ export async function fetchWeatherData(
   windUnit: string = 'metric',
   precipUnit: string = 'metric'
 ): Promise<WeatherData | string> {
-  // await new Promise((resolve) => setTimeout(resolve, 5000));
   const tempUnitParam = tempUnit === 'imperial' ? 'fahrenheit' : 'celsius';
   const windUnitParam = windUnit === 'imperial' ? 'mph' : 'kmh';
   const precipUnitParam = precipUnit === 'imperial' ? 'inch' : 'mm';

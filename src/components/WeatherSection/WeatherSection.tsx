@@ -3,17 +3,7 @@ import WeatherDetails from '@/components/WeatherDetails';
 import DailyForecast from '@/components/DailyForecast';
 import HourlyForecast from '@/components/HourlyForecast';
 import { fetchWeatherData } from '@/utils/fetchWeatherData';
-import type { WeatherData } from '@/types/weather';
-
-type Props = {
-  place?: string;
-  lat: string;
-  long: string;
-  temp?: string;
-  wind?: string;
-  precip?: string;
-  day?: string;
-};
+import type { WeatherData } from '@/types/types';
 
 export default async function WeatherSection({
   place,
@@ -23,7 +13,15 @@ export default async function WeatherSection({
   wind,
   precip,
   day,
-}: Props) {
+}: {
+  place?: string;
+  lat: string;
+  long: string;
+  temp?: string;
+  wind?: string;
+  precip?: string;
+  day?: string;
+}) {
   const weatherData: string | WeatherData = await fetchWeatherData(
     lat,
     long,

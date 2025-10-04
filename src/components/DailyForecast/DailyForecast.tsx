@@ -2,7 +2,11 @@ import * as React from 'react';
 import DailyWeatherCard from '../DailyWeatherCard';
 import { getDayNames } from '@/utils/utils';
 
-type DailyForecastProps = {
+function DailyForecast({
+  daily,
+  tempUnit = 'metric',
+  className = '',
+}: {
   daily?: {
     time: string[];
     weather_code: number[];
@@ -11,13 +15,7 @@ type DailyForecastProps = {
   };
   tempUnit?: string;
   className?: string;
-};
-
-function DailyForecast({
-  daily,
-  tempUnit = 'metric',
-  className = '',
-}: DailyForecastProps) {
+}) {
   const dayNames = getDayNames(daily);
   return (
     <section aria-labelledby="daily-forecast-heading" className={className}>
